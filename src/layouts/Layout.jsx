@@ -14,7 +14,16 @@ export default function Layout() {
   return (
     <React.Fragment>
       <Navbar bg="dark" variant="dark" expand="lg">
-        <Navbar.Brand href="/">Cycloud</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <img
+            src="/bikeicon.png"
+            width="33"
+            height="40"
+            className="d-inline-block"
+            alt="Cycloud logo"
+          />{" "}
+          Cycloud
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
