@@ -16,6 +16,9 @@ import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
 import { LeafletMap, ReviewModal } from "../components";
 import { findRenderedDOMComponentWithClass } from "react-dom/cjs/react-dom-test-utils.development";
 
+const WEATHER_24H =
+  "https://api.data.gov.sg/v1/environment/24-hour-weather-forecast";
+
 const Home = () => {
   //console.log(process.env);
   const [layers, setLayers] = useState(["pcn_all"]);
@@ -25,6 +28,16 @@ const Home = () => {
     console.log(layer);
     setLayers(layer);
   };
+
+  useEffect(() => {
+    fetch(WEATHER_24H)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        //console.log(data.items[0]);
+      })
+      .catch((err) => console.error(err));
+  });
 
   return (
     <>
