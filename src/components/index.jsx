@@ -1,3 +1,4 @@
 import LeafletMap from "./LeafletMap";
+import ReviewModal from "./ReviewModal";
 
-export { LeafletMap };
+export { LeafletMap, ReviewModal };
