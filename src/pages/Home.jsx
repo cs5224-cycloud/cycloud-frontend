@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
+import React, { useEffect, useState, useRef } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  ToggleButtonGroup,
+  ToggleButton,
+} from "react-bootstrap";
 import { GoogleMap, LoadScript, useGoogleMap } from "@react-google-maps/api";
-import { MapComponent } from "../components";
+import { LeafletMap } from "../components";
 
 const Home = () => {
-  console.log(process.env);
+  //console.log(process.env);
   const [layers, setLayers] = useState(["pcn_all"]);
+
+  const mapEl = useRef(null);
 
   const handleLayersChange = (layer) => {
     console.log(layer);
@@ -17,9 +25,6 @@ const Home = () => {
       <br />
       <Row>
         <Col>
-          <MapComponent showPCN={layers.includes("pcn_all")} />
-        </Col>
-        <Col>
           <ToggleButtonGroup
             type="checkbox"
             value={layers}
@@ -30,6 +35,11 @@ const Home = () => {
               Display PCNs
             </ToggleButton>
           </ToggleButtonGroup>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <LeafletMap showPCN={layers.includes("pcn_all")} />
         </Col>
       </Row>
     </>
