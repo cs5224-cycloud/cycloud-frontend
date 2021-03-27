@@ -1,0 +1,8 @@
+.leaflet-container {
+  width: 100wh;
+  height: 70vh;
+}
+
+#accord-toggle {
+  margin-left: 95%;
+}

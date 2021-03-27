@@ -1,3 +1,4 @@
-import MapComponent from "./MapComponent";
+import LeafletMap from "./LeafletMap";
+import ReviewModal from "./ReviewModal";
 
-export { MapComponent };
+export { LeafletMap, ReviewModal };
