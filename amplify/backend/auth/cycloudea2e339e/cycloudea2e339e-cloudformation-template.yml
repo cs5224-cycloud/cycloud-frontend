@@ -99,34 +99,34 @@ Resources:
   
   
   # BEGIN SNS ROLE RESOURCE
-  SNSRole: 
-  # Created to allow the UserPool SMS Config to publish via the Simple Notification Service during MFA Process
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: !If [ShouldNotCreateEnvResources, 'cyclouea2e339e_sns-role', !Join ['',[ 'sns', 'ea2e339e', !Select [3, !Split ['-', !Ref 'AWS::StackName']], '-', !Ref env]]]
-      AssumeRolePolicyDocument: 
-        Version: "2012-10-17"
-        Statement: 
-          - Sid: ""
-            Effect: "Allow"
-            Principal: 
-              Service: "cognito-idp.amazonaws.com"
-            Action: 
-              - "sts:AssumeRole"
-            Condition: 
-              StringEquals:
-                sts:ExternalId: cyclouea2e339e_role_external_id
-      Policies: 
-        - 
-          PolicyName: cyclouea2e339e-sns-policy
-          PolicyDocument: 
-            Version: "2012-10-17"
-            Statement: 
-              - 
-                Effect: "Allow"
-                Action: 
-                  - "sns:Publish"
-                Resource: "*"
+  # SNSRole: 
+  # # Created to allow the UserPool SMS Config to publish via the Simple Notification Service during MFA Process
+  #   Type: AWS::IAM::Role
+  #   Properties:
+  #     RoleName: !If [ShouldNotCreateEnvResources, 'cyclouea2e339e_sns-role', !Join ['',[ 'sns', 'ea2e339e', !Select [3, !Split ['-', !Ref 'AWS::StackName']], '-', !Ref env]]]
+  #     AssumeRolePolicyDocument: 
+  #       Version: "2012-10-17"
+  #       Statement: 
+  #         - Sid: ""
+  #           Effect: "Allow"
+  #           Principal: 
+  #             Service: "cognito-idp.amazonaws.com"
+  #           Action: 
+  #             - "sts:AssumeRole"
+  #           Condition: 
+  #             StringEquals:
+  #               sts:ExternalId: cyclouea2e339e_role_external_id
+  #     Policies: 
+  #       - 
+  #         PolicyName: cyclouea2e339e-sns-policy
+  #         PolicyDocument: 
+  #           Version: "2012-10-17"
+  #           Statement: 
+  #             - 
+  #               Effect: "Allow"
+  #               Action: 
+  #                 - "sns:Publish"
+  #               Resource: "*"
   # BEGIN USER POOL RESOURCES
   UserPool:
   # Created upon user selection
@@ -160,11 +160,11 @@ Resources:
           RequireSymbols: false
           RequireUppercase: false
           
-      MfaConfiguration: !Ref mfaConfiguration
-      SmsVerificationMessage: !Ref smsVerificationMessage
-      SmsConfiguration: 
-        SnsCallerArn: !GetAtt SNSRole.Arn
-        ExternalId: cyclouea2e339e_role_external_id
+      # MfaConfiguration: !Ref mfaConfiguration
+      # SmsVerificationMessage: !Ref smsVerificationMessage
+      # SmsConfiguration: 
+      #   SnsCallerArn: !GetAtt SNSRole.Arn
+      #   ExternalId: cyclouea2e339e_role_external_id
     
   
   UserPoolClientWeb:
