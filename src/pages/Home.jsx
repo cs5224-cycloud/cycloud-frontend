@@ -4,22 +4,36 @@ import { GoogleMap, LoadScript, useGoogleMap } from "@react-google-maps/api";
 import { MapComponent } from "../components";
 import { Link } from "react-router-dom";
 import { Auth } from 'aws-amplify';
+import { AmplifySignOut } from "@aws-amplify/ui-react";
 
 
 const Home = () => {
   console.log(process.env);
   const [layers, setLayers] = useState(["pcn_all"]);
+  const [username, setUsername] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLayersChange = (layer) => {
     console.log(layer);
     setLayers(layer);
   };
 
+  Auth.currentAuthenticatedUser()
+    .then((data) => {
+      setIsLoggedIn(true)
+      console.log(data.username)
+      setUsername(data.username);
+    })
+    .catch(err =>
+      setIsLoggedIn(false)
+    );
+
 
   return (
     <>
       <br />
       <Row>
+        {isLoggedIn ? <h1>Hi {username}</h1> : <h1></h1>}
         <Col>
           <MapComponent showPCN={layers.includes("pcn_all")} />
         </Col>
@@ -33,8 +47,9 @@ const Home = () => {
             <ToggleButton variant="info" value={"pcn_all"}>
               Display PCNs
             </ToggleButton>
-          <Link to="/review" className="btn btn-primary">Review</Link>
           </ToggleButtonGroup>
+          <Link to="/review" className="btn btn-primary">Review</Link>
+          {isLoggedIn ? <AmplifySignOut></AmplifySignOut> : <h1></h1>}
         </Col>
       </Row>
     </>
