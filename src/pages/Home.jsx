@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
+import { Button, Row, Col, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
 import { GoogleMap, LoadScript, useGoogleMap } from "@react-google-maps/api";
 import { MapComponent } from "../components";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Auth } from 'aws-amplify';
 import { AmplifySignOut } from "@aws-amplify/ui-react";
 
@@ -25,10 +25,14 @@ const Home = () => {
       setUsername(data.username);
     })
     .catch(err => {
-      console.log("APA SIH");
       setIsLoggedIn(false);
     }
     );
+  const handleSignOut = (e) => {
+    e.preventDefault();
+    Auth.signOut();
+    <Redirect to={{ pathname: '/' }} />
+  }
 
 
   return (
@@ -51,7 +55,7 @@ const Home = () => {
             </ToggleButton>
           </ToggleButtonGroup>
           <Link to="/review" className="btn btn-primary">Review</Link>
-          {isLoggedIn ? <AmplifySignOut></AmplifySignOut> : <h1></h1>}
+          {isLoggedIn ? <Button onClick={handleSignOut}>Sign out</Button> : <h1></h1>}
         </Col>
       </Row>
     </>
