@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "cycloudea2e339e": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
