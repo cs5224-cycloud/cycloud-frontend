@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cycloud-dev-32020-authRole",
+      "UnauthRoleArn": "arn:aws:iam::890431298066:role/amplify-cycloud-dev-32020-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::890431298066:role/amplify-cycloud-dev-32020-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-cycloud-dev-32020-deployment",
+      "UnauthRoleName": "amplify-cycloud-dev-32020-unauthRole",
+      "StackName": "amplify-cycloud-dev-32020",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:890431298066:stack/amplify-cycloud-dev-32020/50944790-8e68-11eb-b2fa-0687727c192e",
+      "AmplifyAppId": "d3lj4hv2wnlv32"
+    },
+    "categories": {
+      "auth": {
+        "cycloudea2e339e": {}
+      }
+    }
+  }
+}
