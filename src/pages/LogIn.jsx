@@ -18,9 +18,7 @@ const LogIn = () => {
 
   return authState === AuthState.SignedIn && user ? (
       <div className="App">
-        <div>Hello, {user.username}</div>
         <Home />
-          <AmplifySignOut />
       </div>
     ) : (
       <AmplifyAuthenticator>

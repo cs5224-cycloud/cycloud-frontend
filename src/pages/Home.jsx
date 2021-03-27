@@ -24,8 +24,10 @@ const Home = () => {
       console.log(data.username)
       setUsername(data.username);
     })
-    .catch(err =>
-      setIsLoggedIn(false)
+    .catch(err => {
+      console.log("APA SIH");
+      setIsLoggedIn(false);
+    }
     );
 
 
