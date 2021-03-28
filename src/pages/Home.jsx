@@ -19,7 +19,6 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
-import { GoogleMap, LoadScript, useGoogleMap } from "@react-google-maps/api";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
 import { LeafletMap, ReviewModal } from "../components";
 import { findRenderedDOMComponentWithClass } from "react-dom/cjs/react-dom-test-utils.development";
