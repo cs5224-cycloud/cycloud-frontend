@@ -23,6 +23,7 @@ import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
 import { LeafletMap, ReviewModal } from "../components";
 import { findRenderedDOMComponentWithClass } from "react-dom/cjs/react-dom-test-utils.development";
 import { Auth } from 'aws-amplify';
+import { Link, Redirect } from "react-router-dom";
 import { AmplifySignOut } from "@aws-amplify/ui-react";
 
 const WEATHER_24H =
