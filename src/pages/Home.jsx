@@ -115,19 +115,16 @@ const Home = () => {
               </Col>
               <Col>
                 <DropdownButton id="basic-dropdown" title="Select route">
-                  <Dropdown.Item onClick={() => handleDropdown(1)}>
-                    Route 1
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleDropdown(2)}>
-                    Route 2
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleDropdown(39)}>
-                    Route 39
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleDropdown(40)}>
-                    Route 40
-                  </Dropdown.Item>
+                  {[...Array(15).keys()].map((index) => (
+                    <Dropdown.Item
+                      onClick={() => handleDropdown(index)}
+                      key={index}
+                    >
+                      Route {index}
+                    </Dropdown.Item>
+                  ))}
                 </DropdownButton>
+                <div>Route chosen: {selectedRoute}</div>
                 <Button onClick={() => setShowModal(true)} variant="info">
                   Rate routes
                 </Button>
