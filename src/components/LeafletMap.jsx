@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
+import GeneratedRoutes from "../configs/generated.json";
+import path_with_amenities from "../configs/generated_path_with_amenities.json";
 
 const center = [1.3521, 103.8198];
 
@@ -20,17 +22,17 @@ const geojsonFeature = {
   },
 };
 
-const LeafletMap = ({ showPCN }) => {
+const LeafletMap = ({ showPCN, selectedRoute }) => {
   const [pcnJson, setPcnLayer] = useState(geojsonFeature);
-  const [jsonLoaded, setJsonLoaded] = useState(false);
+  const [jsonLoaded, setJsonLoaded] = useState(0);
 
   useEffect(() => {
     fetch(PCN_GEOJSON_URL)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         setPcnLayer(data);
-        setJsonLoaded(true);
+        setJsonLoaded(1);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -45,7 +47,32 @@ const LeafletMap = ({ showPCN }) => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {showPCN && <GeoJSON key={jsonLoaded} data={pcnJson} />}
+      {showPCN && (
+        <GeoJSON
+          key={selectedRoute + jsonLoaded}
+          data={pcnJson}
+          style={(feature) => {
+            //console.log(feature);
+          }}
+          filter={(geoJsonFeature) => {
+            let kmlName = geoJsonFeature["properties"]["Name"];
+            kmlName = String(kmlName).slice(4);
+            // show all pcn paths
+            if (selectedRoute == -1) {
+              return true;
+            } else if (
+              // check if path_with_amenities based on the selected route contains current kml obtained from geojson
+              path_with_amenities["paths"][selectedRoute]["kml"].includes(
+                parseInt(kmlName) - 1
+              )
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          }}
+        />
+      )}
       <Marker position={[51.505, -0.09]}>
         <Popup>
           A pretty CSS3 popup. <br /> Easily customizable.

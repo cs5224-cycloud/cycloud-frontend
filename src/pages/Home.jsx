@@ -18,11 +18,13 @@ import {
   Card,
   Button,
   Form,
+  DropdownButton,
+  Dropdown,
 } from "react-bootstrap";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
 import { LeafletMap, ReviewModal } from "../components";
 import { findRenderedDOMComponentWithClass } from "react-dom/cjs/react-dom-test-utils.development";
-import { Auth } from 'aws-amplify';
+import { Auth } from "aws-amplify";
 import { Link, Redirect } from "react-router-dom";
 import { AmplifySignOut } from "@aws-amplify/ui-react";
 
@@ -35,27 +37,31 @@ const Home = () => {
   const [username, setUsername] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [selectedRoute, setSelectedRoute] = useState(-1);
 
   const handleLayersChange = (layer) => {
     console.log(layer);
     setLayers(layer);
   };
 
+  const handleDropdown = (route) => {
+    setSelectedRoute(route);
+  };
+
   Auth.currentAuthenticatedUser()
     .then((data) => {
-      setIsLoggedIn(true)
-      console.log(data.username)
+      setIsLoggedIn(true);
+      console.log(data.username);
       setUsername(data.username);
     })
-    .catch(err => {
+    .catch((err) => {
       setIsLoggedIn(false);
-    }
-    );
+    });
   const handleSignOut = (e) => {
     e.preventDefault();
     Auth.signOut();
-    <Redirect to={{ pathname: '/' }} />
-  }
+    <Redirect to={{ pathname: "/" }} />;
+  };
 
   useEffect(() => {
     fetch(WEATHER_24H)
@@ -108,10 +114,23 @@ const Home = () => {
                 </Form>
               </Col>
               <Col>
+                <DropdownButton id="basic-dropdown" title="Select route">
+                  {[...Array(15).keys()].map((index) => (
+                    <Dropdown.Item
+                      onClick={() => handleDropdown(index)}
+                      key={index}
+                    >
+                      Route {index}
+                    </Dropdown.Item>
+                  ))}
+                </DropdownButton>
+                <div>Route chosen: {selectedRoute}</div>
                 <Button onClick={() => setShowModal(true)} variant="info">
                   Rate routes
-                  <Link to="/review" className="btn btn-primary">Review</Link>
                 </Button>
+                <Link to="/review" className="btn btn-primary">
+                  Review
+                </Link>
               </Col>
             </Row>
           </Container>
@@ -121,8 +140,15 @@ const Home = () => {
       <Row>
         {isLoggedIn ? <h1>Hi {username}</h1> : <h1></h1>}
         <Col>
-          <LeafletMap showPCN={layers.includes("pcn_all")} />
-          {isLoggedIn ? <Button onClick={handleSignOut}>Sign out</Button> : <h1></h1>}
+          <LeafletMap
+            showPCN={layers.includes("pcn_all")}
+            selectedRoute={selectedRoute}
+          />
+          {isLoggedIn ? (
+            <Button onClick={handleSignOut}>Sign out</Button>
+          ) : (
+            <h1></h1>
+          )}
         </Col>
       </Row>
       <ReviewModal
