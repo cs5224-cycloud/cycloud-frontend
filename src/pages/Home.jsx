@@ -25,7 +25,7 @@ import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
 import { LeafletMap, ReviewModal } from "../components";
 import { findRenderedDOMComponentWithClass } from "react-dom/cjs/react-dom-test-utils.development";
 import { Auth } from "aws-amplify";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { AmplifySignOut } from "@aws-amplify/ui-react";
 
 const WEATHER_24H =
@@ -57,10 +57,10 @@ const Home = () => {
     .catch((err) => {
       setIsLoggedIn(false);
     });
+  
   const handleSignOut = (e) => {
     e.preventDefault();
-    Auth.signOut();
-    <Redirect to={{ pathname: "/" }} />;
+    Auth.signOut()
   };
 
   useEffect(() => {
@@ -72,6 +72,8 @@ const Home = () => {
       })
       .catch((err) => console.error(err));
   });
+    const history = useHistory();
+  const navigateToLogin = () => history.push('/login');//eg.history.push('/login');
 
   return (
     <>
@@ -80,6 +82,7 @@ const Home = () => {
         <Accordion.Toggle as={Card.Header} eventKey="0">
           <b id="accord-toggle">Options</b>
         </Accordion.Toggle>
+        {isLoggedIn ? <h1>Hi {username}</h1> : <h1></h1>}
         <Accordion.Collapse eventKey="0">
           <Container>
             <br />
@@ -125,12 +128,12 @@ const Home = () => {
                   ))}
                 </DropdownButton>
                 <div>Route chosen: {selectedRoute}</div>
-                <Button onClick={() => setShowModal(true)} variant="info">
+                <Button onClick={isLoggedIn ? () => setShowModal(true) : navigateToLogin } variant="info">
                   Rate routes
                 </Button>
-                <Link to="/review" className="btn btn-primary">
+                {/* <Link to="/review" className="btn btn-primary">
                   Review
-                </Link>
+                </Link> */}
               </Col>
             </Row>
           </Container>
@@ -138,14 +141,13 @@ const Home = () => {
       </Accordion>
       <hr />
       <Row>
-        {isLoggedIn ? <h1>Hi {username}</h1> : <h1></h1>}
         <Col>
           <LeafletMap
             showPCN={layers.includes("pcn_all")}
             selectedRoute={selectedRoute}
           />
           {isLoggedIn ? (
-            <Button onClick={handleSignOut}>Sign out</Button>
+            <Link to="/">Sign out</Link>
           ) : (
             <h1></h1>
           )}
