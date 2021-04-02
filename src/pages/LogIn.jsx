@@ -3,6 +3,7 @@ import Home from "./Home";
 import { AmplifyAuthenticator, AmplifySignUp, AmplifySignOut } from '@aws-amplify/ui-react';
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import Layout from '../layouts/Layout';
+import { Button } from 'bootstrap';
 
 
 const LogIn = () => {
@@ -20,7 +21,11 @@ const LogIn = () => {
       <div className="App">
         <Home />
       </div>
-    ) : (
+  ) : (
+      <div>
+      <Link to="/" className="btn btn-primary">
+        Back to Home
+       </Link>
       <AmplifyAuthenticator>
         <AmplifySignUp
           slot="sign-up"
@@ -30,7 +35,8 @@ const LogIn = () => {
             { type: "email" }
           ]}
         />
-      </AmplifyAuthenticator>
+        </AmplifyAuthenticator>
+      </div>
   );
 }
 
