@@ -60,7 +60,8 @@ const Home = () => {
   
   const handleSignOut = (e) => {
     e.preventDefault();
-    Auth.signOut()
+    Auth.signOut();
+    <Redirect to={{ pathname: "/" }} />;
   };
 
   useEffect(() => {
@@ -147,7 +148,7 @@ const Home = () => {
             selectedRoute={selectedRoute}
           />
           {isLoggedIn ? (
-            <Link to="/">Sign out</Link>
+            <Button onClick={handleSignOut}>Sign out</Button>
           ) : (
             <h1></h1>
           )}
@@ -156,6 +157,8 @@ const Home = () => {
       <ReviewModal
         showModal={showModal}
         handleClose={() => setShowModal(false)}
+        selectedRoute={selectedRoute}
+        username={username}
       />
     </>
   );
