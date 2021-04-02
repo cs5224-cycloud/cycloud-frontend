@@ -2,8 +2,7 @@ import React from 'react';
 import Home from "./Home";
 import { AmplifyAuthenticator, AmplifySignUp, AmplifySignOut } from '@aws-amplify/ui-react';
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
-import Layout from '../layouts/Layout';
-import { Button } from 'bootstrap';
+import { Link } from "react-router-dom";
 
 
 const LogIn = () => {
@@ -23,9 +22,6 @@ const LogIn = () => {
       </div>
   ) : (
       <div>
-      <Link to="/" className="btn btn-primary">
-        Back to Home
-       </Link>
       <AmplifyAuthenticator>
         <AmplifySignUp
           slot="sign-up"
