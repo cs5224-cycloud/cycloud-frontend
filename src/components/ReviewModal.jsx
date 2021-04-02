@@ -30,11 +30,13 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
     </Modal>
   );
 
-  // TODO: Remove hardcode
   const submitReview = () => {
     fetch("https://ls3jn9hal4.execute-api.ap-southeast-1.amazonaws.com/Prod/insertRating ", {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
       body: JSON.stringify({
         route_id: selectedRoute,
         username: username,
