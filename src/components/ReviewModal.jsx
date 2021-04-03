@@ -44,15 +44,15 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
   );
 
   const submitReview = () => {
-    fetch("https://ls3jn9hal4.execute-api.ap-southeast-1.amazonaws.com/Prod/insertRating", {
+    fetch("https://kems29t9qc.execute-api.ap-southeast-1.amazonaws.com/Prod/insertRating", {
         method: 'POST',
-      headers: {
+        headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        route_id: selectedRoute,
+        route_id: 1,
         username: username,
-        rating: review.value
+        rating: 1
       })
     })
     .then((data) => {
@@ -62,7 +62,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
       console.log(error, "catch the hoop")
     })
 
-    fetch("https://ls3jn9hal4.execute-api.ap-southeast-1.amazonaws.com/Prod/insertTag", {
+    fetch("https://kems29t9qc.execute-api.ap-southeast-1.amazonaws.com/Prod/insertTag", {
         method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -116,7 +116,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
                   value={views}
                 />
               </Col>
-              <Col>City</Col>
+              <Col md={1}>City</Col>
             </Row>
             <br></br>
             <Form.Label>Route Traffic</Form.Label>
