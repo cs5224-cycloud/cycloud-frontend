@@ -25,7 +25,8 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     console.log(form);
-    console.log(difficulty);
+    console.log("This is the difficulty value");
+    console.log(difficulty.value);
     console.log(views.value);
   };
 
@@ -50,9 +51,9 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        route_id: 1,
+        route_id: selectedRoute,
         username: username,
-        rating: 1
+        rating: rating.value
       })
     })
     .then((data) => {
