@@ -47,8 +47,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
     fetch("https://ls3jn9hal4.execute-api.ap-southeast-1.amazonaws.com/Prod/insertRating", {
         method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         route_id: selectedRoute,
@@ -66,8 +65,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
     fetch("https://ls3jn9hal4.execute-api.ap-southeast-1.amazonaws.com/Prod/insertTag", {
         method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         route_id: selectedRoute,
@@ -107,6 +105,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
               </Col>
               <Col>Hard</Col>
             </Row>
+            <br></br>
             <Form.Label>Route Views</Form.Label>
             <Row>
               <Col md={1}>Nature</Col>
@@ -119,6 +118,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
               </Col>
               <Col>City</Col>
             </Row>
+            <br></br>
             <Form.Label>Route Traffic</Form.Label>
             <Row>
               <Col md={1}>Easy</Col>
@@ -131,8 +131,8 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
               </Col>
               <Col>Hard</Col>
             </Row>
-
-            
+            <Row></Row>
+            <br></br>
             <Form.Label>Overall Experience</Form.Label>
             <Row>
               <Col md={1}>Bad</Col>
@@ -143,7 +143,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
                   value={review}
                 />
               </Col>
-              <Col>Good</Col>
+              <Col md={1}>Good</Col>
             </Row>
 
           </Form.Group>
