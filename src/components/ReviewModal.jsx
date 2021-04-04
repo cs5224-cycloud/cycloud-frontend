@@ -7,21 +7,20 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
   const [traffic, setTraffic] = useState(50);
   const [review, setReview] = useState(50);
   const [show, setShowSuccessfulSubmissionModal] = useState(false);
-  const handleCloseSuccessfulSubmissionModal = () => setShowSuccessfulSubmissionModal(false);
-  const handleShowSuccessfulSubmissionModal = () => setShowSuccessfulSubmissionModal(true);
+  const handleCloseSuccessfulSubmissionModal = () =>
+    setShowSuccessfulSubmissionModal(false);
+  const handleShowSuccessfulSubmissionModal = () =>
+    setShowSuccessfulSubmissionModal(true);
 
   const handleDifficultyChange = ({ target: { value } }) =>
     setDifficulty(value);
-  
-  const handleViewsChange = ({ target: { value } }) =>
-    setViews(value);
 
-  const handleTrafficChange = ({ target: { value } }) =>
-    setTraffic(value);
-  
-  const handleReviewChange = ({ target: { value } }) =>
-    setReview(value);
-  
+  const handleViewsChange = ({ target: { value } }) => setViews(value);
+
+  const handleTrafficChange = ({ target: { value } }) => setTraffic(value);
+
+  const handleReviewChange = ({ target: { value } }) => setReview(value);
+
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     console.log(form);
@@ -30,14 +29,17 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
     console.log(views.value);
   };
 
- const successfulSubmissionModal = (
+  const successfulSubmissionModal = (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Modal heading</Modal.Title>
       </Modal.Header>
       <Modal.Body>Woohoo, your review is submitted!</Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleCloseSuccessfulSubmissionModal}>
+        <Button
+          variant="secondary"
+          onClick={handleCloseSuccessfulSubmissionModal}
+        >
           Close
         </Button>
       </Modal.Footer>
@@ -45,46 +47,50 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
   );
 
   const submitReview = () => {
-    fetch("https://kems29t9qc.execute-api.ap-southeast-1.amazonaws.com/Prod/insertRating", {
-        method: 'POST',
+    fetch(
+      "https://kems29t9qc.execute-api.ap-southeast-1.amazonaws.com/Prod/insertRating",
+      {
+        method: "POST",
         headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        route_id: selectedRoute,
-        username: username,
-        rating: rating.value
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          route_id: selectedRoute,
+          username: username,
+          rating: review,
+        }),
+      }
+    )
+      .then((data) => {
+        handleShowSuccessfulSubmissionModal();
       })
-    })
-    .then((data) => {
-      handleShowSuccessfulSubmissionModal()
-    })
-    .catch((error) => {
-      console.log(error, "catch the hoop")
-    })
+      .catch((error) => {
+        console.log(error, "catch the hoop");
+      });
 
-    fetch("https://kems29t9qc.execute-api.ap-southeast-1.amazonaws.com/Prod/insertTag", {
-        method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        route_id: selectedRoute,
-        username: username,
-        difficulty: difficulty.value,
-        views: views.value,
-        traffic: traffic.value
+    fetch(
+      "https://kems29t9qc.execute-api.ap-southeast-1.amazonaws.com/Prod/insertTag",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          route_id: selectedRoute,
+          username: username,
+          difficulty: difficulty.value,
+          views: views.value,
+          traffic: traffic.value,
+        }),
+      }
+    )
+      .then((data) => {
+        handleShowSuccessfulSubmissionModal();
       })
-    })
-    .then((data) => {
-      handleShowSuccessfulSubmissionModal()
-    })
-    .catch((error) => {
-      console.log(error, "catch the hoop")
-    })
-
-  }
-
+      .catch((error) => {
+        console.log(error, "catch the hoop");
+      });
+  };
 
   return (
     <Modal show={showModal} onHide={handleClose} size="lg" centered>
@@ -146,7 +152,6 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
               </Col>
               <Col md={1}>Good</Col>
             </Row>
-
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
@@ -154,8 +159,8 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
             Close
           </Button>
           <Button variant="primary" onClick={submitReview} type="submit">
-              Submit
-            </Button>
+            Submit
+          </Button>
         </Modal.Footer>
       </Form>
     </Modal>
