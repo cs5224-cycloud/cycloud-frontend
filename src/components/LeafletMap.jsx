@@ -32,6 +32,12 @@ const LeafletMap = ({ showPCN, selectedRoute }) => {
 
   const selectedPath = path_with_amenities["paths"][selectedRoute];
 
+  const onEachFeature = (feature, layer) => {
+    if (feature.properties && feature.properties.Description) {
+      layer.bindPopup(feature.properties.Description);
+    }
+  };
+
   useEffect(() => {
     fetch(PCN_GEOJSON_URL)
       .then((res) => res.json())
@@ -86,7 +92,6 @@ const LeafletMap = ({ showPCN, selectedRoute }) => {
       <GeoJSON
         key={selectedRoute}
         data={amenitiesGeoJson}
-        style={{ backgroundColor: "green" }}
         filter={(feature) => {
           let kmlName = feature["properties"]["Name"];
           kmlName = String(kmlName).slice(4);
@@ -96,6 +101,7 @@ const LeafletMap = ({ showPCN, selectedRoute }) => {
             return true;
           }
         }}
+        onEachFeature={onEachFeature}
       />
       <Marker position={[51.505, -0.09]}>
         <Popup>
@@ -107,3 +113,8 @@ const LeafletMap = ({ showPCN, selectedRoute }) => {
 };
 
 export default LeafletMap;
+
+// pointToLayer={(geoJsonPoint, latlng) => {
+//     console.log(geoJsonPoint, latlng);
+//     return;
+//   }}
