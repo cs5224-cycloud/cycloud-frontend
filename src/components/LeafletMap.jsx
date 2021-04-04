@@ -92,7 +92,7 @@ const LeafletMap = ({ showPCN, selectedRoute }) => {
           kmlName = String(kmlName).slice(4);
           if (selectedRoute < 0) {
             return false;
-          } else if (selectedPath["amenities"].includes(parseInt(kmlName))) {
+          } else if (selectedPath["amenities"].includes(parseInt(kmlName) - 1)) {
             return true;
           }
         }}
