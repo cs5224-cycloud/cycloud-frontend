@@ -22,14 +22,11 @@ import {
   Dropdown,
 } from "react-bootstrap";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
-import { LeafletMap, ReviewModal } from "../components";
+import { LeafletMap, ReviewModal, Weather } from "../components";
 import { findRenderedDOMComponentWithClass } from "react-dom/cjs/react-dom-test-utils.development";
 import { Auth } from "aws-amplify";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { AmplifySignOut } from "@aws-amplify/ui-react";
-
-const WEATHER_24H =
-  "https://api.data.gov.sg/v1/environment/24-hour-weather-forecast";
 
 const Home = () => {
   //console.log(process.env);
@@ -57,28 +54,22 @@ const Home = () => {
     .catch((err) => {
       setIsLoggedIn(false);
     });
-  
+
   const handleSignOut = (e) => {
     e.preventDefault();
     Auth.signOut();
     <Redirect to={{ pathname: "/" }} />;
   };
 
-  useEffect(() => {
-    fetch(WEATHER_24H)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        //console.log(data.items[0]);
-      })
-      .catch((err) => console.error(err));
-  });
-    const history = useHistory();
-  const navigateToLogin = () => history.push('/login');//eg.history.push('/login');
+  const history = useHistory();
+  const navigateToLogin = () => history.push("/login"); //eg.history.push('/login');
 
   return (
     <>
       <br />
+      <Col md={10}>
+        <Weather />
+      </Col>
       <Accordion defaultActiveKey="0">
         <Accordion.Toggle as={Card.Header} eventKey="0">
           <b id="accord-toggle">Options</b>
@@ -129,7 +120,12 @@ const Home = () => {
                   ))}
                 </DropdownButton>
                 <div>Route chosen: {selectedRoute}</div>
-                <Button onClick={isLoggedIn ? () => setShowModal(true) : navigateToLogin } variant="info">
+                <Button
+                  onClick={
+                    isLoggedIn ? () => setShowModal(true) : navigateToLogin
+                  }
+                  variant="info"
+                >
                   Rate routes
                 </Button>
                 {/* <Link to="/review" className="btn btn-primary">
