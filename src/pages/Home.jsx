@@ -45,7 +45,7 @@ const Home = () => {
 
   const startEndsArray = path_start_end["paths"].map((path, index) => {
     return {
-      name: path.start + " - " + path.end,
+      name: path.start.trim() + " - " + path.end.trim(),
       value: index,
     };
   });
