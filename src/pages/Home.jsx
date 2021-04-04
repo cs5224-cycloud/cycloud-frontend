@@ -1,8 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import { Button, Row, Col, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
-// import { GoogleMap, LoadScript, useGoogleMap } from "@react-google-maps/api";
-// import { MapComponent } from "../components";
-// import { Link, Redirect } from "react-router-dom";
 // import { Auth } from 'aws-amplify';
 // import { AmplifySignOut } from "@aws-amplify/ui-react";
 
@@ -24,7 +19,7 @@ import {
   Tab,
 } from "react-bootstrap";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
-import { LeafletMap, ReviewModal, CriteriaSliders } from "../components";
+import { LeafletMap, ReviewModal, Weather, CriteriaSliders } from "../components";
 import { findRenderedDOMComponentWithClass } from "react-dom/cjs/react-dom-test-utils.development";
 import { Auth } from "aws-amplify";
 import { Link, Redirect, useHistory } from "react-router-dom";
@@ -32,9 +27,6 @@ import { AmplifySignOut } from "@aws-amplify/ui-react";
 import path_start_end from "../configs/generated_path_start_end.json";
 import SelectSearch from "react-select-search";
 import fuzzySearch from "../services/fuzzySearch";
-
-const WEATHER_24H =
-  "https://api.data.gov.sg/v1/environment/24-hour-weather-forecast";
 
 const Home = () => {
   const [layers, setLayers] = useState(["pcn_all"]);
@@ -75,15 +67,6 @@ const Home = () => {
     <Redirect to={{ pathname: "/" }} />;
   };
 
-  useEffect(() => {
-    fetch(WEATHER_24H)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        //console.log(data.items[0]);
-      })
-      .catch((err) => console.error(err));
-  });
   const history = useHistory();
   const navigateToLogin = () => history.push("/login"); //eg.history.push('/login');
 
@@ -101,6 +84,9 @@ const Home = () => {
         </ToggleButton>
       </ToggleButtonGroup>
       <br />
+      <Col md={10}>
+        <Weather />
+      </Col>
       <Accordion defaultActiveKey="0">
         <Accordion.Toggle as={Card.Header} eventKey="0">
           <b id="accord-toggle">Options</b>
@@ -137,7 +123,7 @@ const Home = () => {
                   }
                   variant="info"
                 >
-                  Rate route
+                  Rate routes
                 </Button>
               </Col>
             </Row>
