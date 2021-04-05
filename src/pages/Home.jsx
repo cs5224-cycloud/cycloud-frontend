@@ -1,8 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import { Button, Row, Col, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
-// import { GoogleMap, LoadScript, useGoogleMap } from "@react-google-maps/api";
-// import { MapComponent } from "../components";
-// import { Link, Redirect } from "react-router-dom";
 // import { Auth } from 'aws-amplify';
 // import { AmplifySignOut } from "@aws-amplify/ui-react";
 
@@ -20,21 +15,32 @@ import {
   Form,
   DropdownButton,
   Dropdown,
+  Tabs,
+  Tab,
 } from "react-bootstrap";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
-import { LeafletMap, ReviewModal, Weather } from "../components";
+import { LeafletMap, ReviewModal, Weather, CriteriaSliders } from "../components";
 import { findRenderedDOMComponentWithClass } from "react-dom/cjs/react-dom-test-utils.development";
 import { Auth } from "aws-amplify";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { AmplifySignOut } from "@aws-amplify/ui-react";
+import path_start_end from "../configs/generated_path_start_end.json";
+import SelectSearch from "react-select-search";
+import fuzzySearch from "../services/fuzzySearch";
 
 const Home = () => {
-  //console.log(process.env);
   const [layers, setLayers] = useState(["pcn_all"]);
   const [username, setUsername] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedRoute, setSelectedRoute] = useState(-1);
+
+  const startEndsArray = path_start_end["paths"].map((path, index) => {
+    return {
+      name: path.start.trim() + " - " + path.end.trim(),
+      value: index,
+    };
+  });
 
   const handleLayersChange = (layer) => {
     console.log(layer);
@@ -66,6 +72,17 @@ const Home = () => {
 
   return (
     <>
+      {isLoggedIn ? <h1>Hi {username}</h1> : <h1></h1>}
+      <ToggleButtonGroup
+        type="checkbox"
+        value={layers}
+        onChange={handleLayersChange}
+        vertical={true}
+      >
+        <ToggleButton variant="success" value={"pcn_all"}>
+          Display PCNs
+        </ToggleButton>
+      </ToggleButtonGroup>
       <br />
       <Col md={10}>
         <Weather />
@@ -74,52 +91,32 @@ const Home = () => {
         <Accordion.Toggle as={Card.Header} eventKey="0">
           <b id="accord-toggle">Options</b>
         </Accordion.Toggle>
-        {isLoggedIn ? <h1>Hi {username}</h1> : <h1></h1>}
+
         <Accordion.Collapse eventKey="0">
-          <Container>
+          <Container fluid>
             <br />
             <Row>
-              <Col>Criteria</Col>
-              <Col md={6}>Routing</Col>
-              <Col>Review</Col>
-            </Row>
-            <Row>
-              <Col>
-                <ToggleButtonGroup
-                  type="checkbox"
-                  value={layers}
-                  onChange={handleLayersChange}
-                  vertical={true}
-                >
-                  <ToggleButton variant="success" value={"pcn_all"}>
-                    Display PCNs
-                  </ToggleButton>
-                </ToggleButtonGroup>
+              <Col md={9}>
+                <Tabs defaultActiveKey="search" id="uncontrolled-tab">
+                  <Tab eventKey="criteria" title="Search by Criteria">
+                    <br />
+                    <CriteriaSliders />
+                  </Tab>
+                  <Tab eventKey="search" title="Search by Routes">
+                    <br />
+                    <div>Route chosen: {selectedRoute}</div>
+                    <SelectSearch
+                      search
+                      options={startEndsArray}
+                      name="route"
+                      placeholder="Choose your route"
+                      filterOptions={fuzzySearch}
+                      onChange={handleDropdown}
+                    />
+                  </Tab>
+                </Tabs>
               </Col>
-              <Col md={6}>
-                <Form>
-                  <Form.Group>
-                    <Form.Label>Start</Form.Label>
-                    <Form.Control type="search" />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label>End</Form.Label>
-                    <Form.Control type="search" />
-                  </Form.Group>
-                </Form>
-              </Col>
-              <Col>
-                <DropdownButton id="basic-dropdown" title="Select route">
-                  {[...Array(15).keys()].map((index) => (
-                    <Dropdown.Item
-                      onClick={() => handleDropdown(index)}
-                      key={index}
-                    >
-                      Route {index}
-                    </Dropdown.Item>
-                  ))}
-                </DropdownButton>
-                <div>Route chosen: {selectedRoute}</div>
+              <Col md={3} id="rateDiv">
                 <Button
                   onClick={
                     isLoggedIn ? () => setShowModal(true) : navigateToLogin
@@ -128,28 +125,21 @@ const Home = () => {
                 >
                   Rate routes
                 </Button>
-                {/* <Link to="/review" className="btn btn-primary">
-                  Review
-                </Link> */}
               </Col>
             </Row>
           </Container>
         </Accordion.Collapse>
       </Accordion>
       <hr />
-      <Row>
-        <Col>
-          <LeafletMap
-            showPCN={layers.includes("pcn_all")}
-            selectedRoute={selectedRoute}
-          />
-          {isLoggedIn ? (
-            <Button onClick={handleSignOut}>Sign out</Button>
-          ) : (
-            <h1></h1>
-          )}
-        </Col>
-      </Row>
+      <LeafletMap
+        showPCN={layers.includes("pcn_all")}
+        selectedRoute={selectedRoute}
+      />
+      {isLoggedIn ? (
+        <Button onClick={handleSignOut}>Sign out</Button>
+      ) : (
+        <h1></h1>
+      )}
       <ReviewModal
         showModal={showModal}
         handleClose={() => setShowModal(false)}
