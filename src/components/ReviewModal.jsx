@@ -24,10 +24,9 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
   
   const handleSubmit = (event) => {
     const form = event.currentTarget;
-    console.log(form);
     console.log("This is the difficulty value");
-    console.log(difficulty.value);
-    console.log(views.value);
+    console.log(difficulty);
+    console.log(views);
   };
 
  const successfulSubmissionModal = (
@@ -53,7 +52,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
       body: JSON.stringify({
         route_id: selectedRoute,
         username: username,
-        rating: rating.value
+        rating: review
       })
     })
     .then((data) => {
@@ -71,9 +70,9 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
       body: JSON.stringify({
         route_id: selectedRoute,
         username: username,
-        difficulty: difficulty.value,
-        views: views.value,
-        traffic: traffic.value
+        difficulty: difficulty,
+        views: views,
+        traffic: traffic
       })
     })
     .then((data) => {
@@ -104,7 +103,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
                   value={difficulty}
                 />
               </Col>
-              <Col>Hard</Col>
+              <Col md={1}>Hard</Col>
             </Row>
             <br></br>
             <Form.Label>Route Views</Form.Label>
@@ -130,7 +129,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
                   value={traffic}
                 />
               </Col>
-              <Col>Hard</Col>
+              <Col md={1}>Hard</Col>
             </Row>
             <Row></Row>
             <br></br>
