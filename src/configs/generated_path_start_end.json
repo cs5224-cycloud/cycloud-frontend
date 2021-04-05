@@ -1,0 +1,692 @@
+{
+  "paths": [
+    {
+      "name": "route_0",
+      "start": "Ulu Pandan PC",
+      "end": "West Coast Park Connector",
+      "kml": [
+        177,
+        173,
+        45,
+        147,
+        42,
+        44
+      ]
+    },
+    {
+      "name": "route_1",
+      "start": "Serangoon Park Connector",
+      "end": "Kallang Park Connector",
+      "kml": [
+        79,
+        75,
+        71,
+        66,
+        76,
+        78,
+        2,
+        123
+      ]
+    },
+    {
+      "name": "route_2",
+      "start": "Mandai Park Connector",
+      "end": "Sembawang Park Connector",
+      "kml": [
+        6,
+        4,
+        5,
+        56,
+        17,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "route_3",
+      "start": "Pang Sua Park Connector",
+      "end": "Pang Sua Park Connector",
+      "kml": [
+        137,
+        136,
+        135
+      ]
+    },
+    {
+      "name": "route_4",
+      "start": "Bedok Park Connector",
+      "end": "Pasir Ris Park ",
+      "kml": [
+        230,
+        24,
+        23,
+        26,
+        81,
+        22,
+        87,
+        33
+      ]
+    },
+    {
+      "name": "route_5",
+      "start": "East Coast Park ",
+      "end": "Geylang Park Connector",
+      "kml": [
+        39,
+        36,
+        37,
+        38,
+        86,
+        153
+      ]
+    },
+    {
+      "name": "route_6",
+      "start": "East Coast Park ",
+      "end": "Geylang Park Connector",
+      "kml": [
+        86,
+        38,
+        36,
+        37,
+        39,
+        153
+      ]
+    },
+    {
+      "name": "route_7",
+      "start": "Jalan Pelikat Park Connector",
+      "end": "Whampoa Park Connector",
+      "kml": [
+        80,
+        92,
+        77,
+        94,
+        61,
+        62,
+        63,
+        74
+      ]
+    },
+    {
+      "name": "route_8",
+      "start": "Alexandra Garden Trail",
+      "end": "Alexandra Park Connector",
+      "kml": [
+        179,
+        134,
+        151,
+        150
+      ]
+    },
+    {
+      "name": "route_9",
+      "start": "Buangkok Park Connector",
+      "end": "Punggol Promenade Riverside Walk",
+      "kml": [
+        103,
+        2,
+        102,
+        105,
+        104,
+        120,
+        110,
+        106
+      ]
+    },
+    {
+      "name": "route_10",
+      "start": "Kallang Park Connector",
+      "end": "Pelton Canal Park Connector",
+      "kml": [
+        66,
+        70,
+        68,
+        69,
+        64,
+        62,
+        61,
+        94
+      ]
+    },
+    {
+      "name": "route_11",
+      "start": "Bedok Park Connector",
+      "end": "Pasir Ris Park ",
+      "kml": [
+        228,
+        24,
+        23,
+        26,
+        81,
+        22,
+        87,
+        33
+      ]
+    },
+    {
+      "name": "route_12",
+      "start": "Springleaf Park Connector",
+      "end": "Khatib Bongsu Park Connector",
+      "kml": [
+        166,
+        3,
+        8,
+        9,
+        12,
+        11,
+        13
+      ]
+    },
+    {
+      "name": "route_13",
+      "start": "Sun Plaza Park ",
+      "end": "Pasir Ris Park ",
+      "kml": [
+        225,
+        23,
+        24,
+        228
+      ]
+    },
+    {
+      "name": "route_14",
+      "start": "Buangkok Park Connector",
+      "end": "Punggol Promenade Riverside Walk",
+      "kml": [
+        105,
+        102,
+        103,
+        2,
+        104,
+        120,
+        110,
+        106
+      ]
+    },
+    {
+      "name": "route_15",
+      "start": "Punggol Waterway",
+      "end": "Punggol Waterway",
+      "kml": [
+        111,
+        101,
+        100,
+        97,
+        98,
+        50,
+        109,
+        107
+      ]
+    },
+    {
+      "name": "route_16",
+      "start": "Geylang Park Connector",
+      "end": "East Coast Park ",
+      "kml": [
+        153,
+        86,
+        38,
+        36,
+        37,
+        39
+      ]
+    },
+    {
+      "name": "route_17",
+      "start": "Khatib Bongsu Park Connector",
+      "end": "Springleaf Park Connector",
+      "kml": [
+        13,
+        11,
+        12,
+        8,
+        9,
+        166,
+        3
+      ]
+    },
+    {
+      "name": "route_18",
+      "start": "Khatib Bongsu Park Connector",
+      "end": "Springleaf Park Connector",
+      "kml": [
+        12,
+        8,
+        9,
+        11,
+        13,
+        166,
+        3
+      ]
+    },
+    {
+      "name": "route_19",
+      "start": "Bukit Timah Park Connector",
+      "end": "Bukit Panjang Park Connector",
+      "kml": [
+        195,
+        194,
+        130,
+        131,
+        192,
+        132,
+        219,
+        191
+      ]
+    },
+    {
+      "name": "route_20",
+      "start": "Hougang Avenue ",
+      "end": "Punggol Waterway",
+      "kml": [
+        122,
+        0,
+        1,
+        93,
+        106,
+        107,
+        108,
+        113
+      ]
+    },
+    {
+      "name": "route_21",
+      "start": "Alexandra Park Connector",
+      "end": "Alexandra Garden Trail",
+      "kml": [
+        150,
+        151,
+        134,
+        179
+      ]
+    },
+    {
+      "name": "route_22",
+      "start": "Khatib Bongsu Park Connector",
+      "end": "Springleaf Park Connector",
+      "kml": [
+        11,
+        12,
+        8,
+        9,
+        13,
+        166,
+        3
+      ]
+    },
+    {
+      "name": "route_23",
+      "start": "Bedok Park Connector",
+      "end": "Bedok Park Connector",
+      "kml": [
+        27,
+        28,
+        29,
+        32,
+        90,
+        46,
+        34,
+        33
+      ]
+    },
+    {
+      "name": "route_24",
+      "start": "Khatib Bongsu Park Connector",
+      "end": "Sembawang Park ",
+      "kml": [
+        18,
+        11,
+        13,
+        19,
+        142,
+        143,
+        204
+      ]
+    },
+    {
+      "name": "route_25",
+      "start": "Bedok Town Park",
+      "end": "Bedok Park Connector",
+      "kml": [
+        89,
+        30,
+        27,
+        28,
+        31,
+        60,
+        33,
+        34
+      ]
+    },
+    {
+      "name": "route_26",
+      "start": "Mandai PC ",
+      "end": "Central Catchment Park Connector",
+      "kml": [
+        167,
+        8,
+        9,
+        10,
+        144
+      ]
+    },
+    {
+      "name": "route_27",
+      "start": "Woodlands ",
+      "end": "Mandai Park Connector",
+      "kml": [
+        158,
+        21,
+        20,
+        55,
+        17,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "route_28",
+      "start": "East Coast Park ",
+      "end": "Geylang Park Connector",
+      "kml": [
+        37,
+        36,
+        38,
+        39,
+        86,
+        153
+      ]
+    },
+    {
+      "name": "route_29",
+      "start": "Hougang Avenue ",
+      "end": "Punggol Waterway",
+      "kml": [
+        106,
+        1,
+        0,
+        93,
+        107,
+        108,
+        113,
+        114
+      ]
+    },
+    {
+      "name": "route_30",
+      "start": "Central Catchment Park Connector",
+      "end": "Woodlands ",
+      "kml": [
+        55,
+        17,
+        8,
+        9,
+        10,
+        144,
+        158,
+        21
+      ]
+    },
+    {
+      "name": "route_31",
+      "start": "Bukit Timah Park Connector",
+      "end": "Bukit Panjang Park Connector",
+      "kml": [
+        195,
+        194,
+        130,
+        131,
+        192,
+        132,
+        219,
+        191
+      ]
+    },
+    {
+      "name": "route_32",
+      "start": "Punggol Waterway",
+      "end": "Sungei Serangoon Park Connector",
+      "kml": [
+        115,
+        97,
+        100,
+        101,
+        111,
+        110,
+        106,
+        1
+      ]
+    },
+    {
+      "name": "route_33",
+      "start": "Marsiling Park Connector",
+      "end": "Woodlands ",
+      "kml": [
+        59,
+        20,
+        21,
+        54,
+        52,
+        16,
+        57,
+        58
+      ]
+    },
+    {
+      "name": "route_34",
+      "start": "Kallang Park Connector",
+      "end": "Pelton Canal Park Connector",
+      "kml": [
+        70,
+        66,
+        68,
+        69,
+        64,
+        62,
+        61,
+        94
+      ]
+    },
+    {
+      "name": "route_35",
+      "start": "Pang Sua PC extension ",
+      "end": "Pang Sua PC extension ",
+      "kml": [
+        149
+      ]
+    },
+    {
+      "name": "route_36",
+      "start": "Kallang Park Connector",
+      "end": "Balam Park Connector",
+      "kml": [
+        156,
+        62,
+        61,
+        68,
+        70,
+        66,
+        94,
+        77
+      ]
+    },
+    {
+      "name": "route_37",
+      "start": "Buangkok Park Connector",
+      "end": "Punggol Promenade Riverside Walk",
+      "kml": [
+        103,
+        2,
+        102,
+        105,
+        104,
+        120,
+        110,
+        106
+      ]
+    },
+    {
+      "name": "route_38",
+      "start": "Mandai Park Connector",
+      "end": "Sembawang Park Connector",
+      "kml": [
+        6,
+        4,
+        5,
+        56,
+        17,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "route_39",
+      "start": "Dairy Farm Nature Park",
+      "end": "Pang Sua Park Connector",
+      "kml": [
+        187,
+        130,
+        162,
+        164,
+        163,
+        136,
+        135,
+        194
+      ]
+    },
+    {
+      "name": "route_40",
+      "start": "Jurong Park Connector",
+      "end": "West Coast Park Connector",
+      "kml": [
+        126,
+        125,
+        124,
+        174,
+        173,
+        45,
+        147,
+        42
+      ]
+    },
+    {
+      "name": "route_41",
+      "start": "Mandai PC ",
+      "end": "Central Catchment Park Connector",
+      "kml": [
+        167,
+        8,
+        9,
+        10,
+        144
+      ]
+    },
+    {
+      "name": "route_42",
+      "start": "Mandai Park Connector",
+      "end": "Sembawang Park Connector",
+      "kml": [
+        145,
+        4,
+        5,
+        56,
+        17,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "route_43",
+      "start": "Jurong West Park Connector",
+      "end": "Jurong Park Connector",
+      "kml": [
+        196,
+        127,
+        138
+      ]
+    },
+    {
+      "name": "route_44",
+      "start": "Bedok Park Connector",
+      "end": "Bedok Park Connector",
+      "kml": [
+        28,
+        27,
+        29,
+        32,
+        90,
+        46,
+        34,
+        33
+      ]
+    },
+    {
+      "name": "route_45",
+      "start": "East Coast Park ",
+      "end": "Geylang Park Connector",
+      "kml": [
+        40,
+        36,
+        37,
+        38,
+        39,
+        86,
+        153
+      ]
+    },
+    {
+      "name": "route_46",
+      "start": "Jurong West Park Connector",
+      "end": "Jurong Central Park ",
+      "kml": [
+        218,
+        216,
+        138,
+        217
+      ]
+    },
+    {
+      "name": "route_47",
+      "start": "Woodlands ",
+      "end": "Sembawang Park Connector",
+      "kml": [
+        16,
+        52,
+        53,
+        181,
+        141,
+        140,
+        51,
+        4
+      ]
+    },
+    {
+      "name": "route_48",
+      "start": "Kallang Park Connector",
+      "end": "Paya Lebar Park Connector",
+      "kml": [
+        95,
+        77,
+        94,
+        61,
+        62,
+        63,
+        74,
+        72
+      ]
+    },
+    {
+      "name": "route_49",
+      "start": "West Coast Park ",
+      "end": "West Coast Park ",
+      "kml": [
+        215
+      ]
+    }
+  ]
+}
