@@ -20,8 +20,11 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
 
   const handleTrafficChange = ({ target: { value } }) => setTraffic(value);
 
-  const handleReviewChange = ({ target: { value } }) => setReview(value);
-
+  const handleReviewChange = ( newRating, name ) => {
+      this.setState({
+        review: newRating
+      });
+    }
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     console.log("This is the difficulty value");
@@ -146,6 +149,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
               <Col md={10}>
                 <StarRatings
                   rating={review}
+                  starHoverColor="yellow"
                   starRatedColor="yellow"
                   changeRating={handleReviewChange}
                   numberOfStars={5}
