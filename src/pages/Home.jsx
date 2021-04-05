@@ -135,7 +135,7 @@ const Home = () => {
         showPCN={layers.includes("pcn_all")}
         selectedRoute={selectedRoute}
       />
-      {isLoggedIn ? (
+      {isLoggedIn && (selectedRoute != -1) ? (
         <Button onClick={handleSignOut}>Sign out</Button>
       ) : (
         <h1></h1>

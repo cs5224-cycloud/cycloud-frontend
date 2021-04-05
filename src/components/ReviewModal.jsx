@@ -143,10 +143,12 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
             <Row>
               <Col md={1}>Bad</Col>
               <Col md={10}>
-                <Form.Control
-                  type="range"
-                  onChange={handleReviewChange}
-                  value={review}
+                <StarRatings
+                  rating={this.state.review}
+                  starRatedColor="yellow"
+                  changeRating={handleReviewChange}
+                  numberOfStars={5}
+                  name='rating'
                 />
               </Col>
               <Col md={1}>Good</Col>
