@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Modal, Button, Range, Form } from "react-bootstrap";
-import StarRatings from './react-star-ratings';
+import StarRatings from "react-star-ratings";
 
 const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
   const [difficulty, setDifficulty] = useState(50);
