@@ -145,7 +145,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
               <Col md={1}>Bad</Col>
               <Col md={10}>
                 <StarRatings
-                  rating={this.state.review}
+                  rating={review}
                   starRatedColor="yellow"
                   changeRating={handleReviewChange}
                   numberOfStars={5}
