@@ -47,7 +47,7 @@ const Home = () => {
     setLayers(layer);
   };
 
-  const handleDropdown = (route) => {
+  const handleChoseRoute = (route) => {
     setSelectedRoute(route);
   };
 
@@ -100,7 +100,7 @@ const Home = () => {
                 <Tabs defaultActiveKey="search" id="uncontrolled-tab">
                   <Tab eventKey="criteria" title="Search by Criteria">
                     <br />
-                    <CriteriaSliders />
+                    <CriteriaSliders submitHandler={handleChoseRoute}/>
                   </Tab>
                   <Tab eventKey="search" title="Search by Routes">
                     <br />
@@ -111,7 +111,7 @@ const Home = () => {
                       name="route"
                       placeholder="Choose your route"
                       filterOptions={fuzzySearch}
-                      onChange={handleDropdown}
+                      onChange={handleChoseRoute}
                     />
                   </Tab>
                 </Tabs>

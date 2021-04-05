@@ -20,7 +20,51 @@ const CriteriaSliders = ({}) => {
     const form = event.currentTarget;
     console.log(form);
     console.log(difficulty, views, traffic);
+    console.log(JSON.stringify({
+      inputs: [
+        { numberValue: difficulty },
+        { numberValue: views },
+        { numberValue: traffic }
+      ]
+    }));
   };
+
+  const submitSearch = () => {
+    fetch(
+      "https://us-central1-sage-philosophy-309216.cloudfunctions.net/demo_reco_endpoint",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          inputs: [
+            { numberValue: difficulty },
+            { numberValue: views },
+            { numberValue: traffic }
+          ]
+        }),
+      }
+    )
+      .then((data) => {
+        console.log("successful!");
+        console.log(data);
+        var parsedData = JSON.parse(data);
+        var maximumScore = 0;
+        var bestRoute = -1;
+        for (var i = 0; i < parsedData.length; i++) {
+          if (parsedData[i].tables.score > maximumScore) {
+            maximumScore = parsedData[i].tables.score;
+            bestRoute = parseInt(parsedData[i].tables.stringValue);
+          }
+        }
+        this.props.submitHandler(bestRoute);
+      })
+      .catch((error) => {
+        console.log(error, "catch the hoop");
+      });
+
+  }
 
   return (
     <>
@@ -65,7 +109,7 @@ const CriteriaSliders = ({}) => {
             <Col md={LABEL_WIDTH}>Heavy</Col>
           </Row>
         </Form.Group>
-        <Button variant="secondary" type="submit">
+        <Button variant="secondary" type="submit" onClick={submitSearch}>
           Find route
         </Button>
       </Form>
