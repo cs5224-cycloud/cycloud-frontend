@@ -148,6 +148,18 @@ const Home = () => {
       <Col md={10}>
         <Weather />
       </Col>
+      <br />
+      <Row className="justify-content-md-center">
+        
+        {
+          selectedRoute != -1 ?
+            
+            <h3>Selected route: {selectedRoute}</h3>
+            :
+            <h3><i>No route selected</i></h3>
+        }
+      </Row>
+
       <Accordion defaultActiveKey="0">
         <Accordion.Toggle as={Card.Header} eventKey="0">
           <b id="accord-toggle">Options</b>
@@ -156,6 +168,8 @@ const Home = () => {
         <Accordion.Collapse eventKey="0">
           <Container fluid>
             <br />
+            <Row>
+            </Row>
             <Row>
               <Col md={9}>
                 <Tabs defaultActiveKey="search" id="uncontrolled-tab">
@@ -210,8 +224,6 @@ const Home = () => {
                     {/* <CriteriaSliders submitHandler={handleChoseRoute}/> */}
                   </Tab>
                   <Tab eventKey="search" title="Search by Routes">
-                    <br />
-                    <div>Route chosen: {selectedRoute}</div>
                     <SelectSearch
                       search
                       options={startEndsArray}
@@ -223,16 +235,21 @@ const Home = () => {
                   </Tab>
                 </Tabs>
               </Col>
-              <Col md={3} id="rateDiv">
-                <Button
-                  onClick={
-                    isLoggedIn ? () => setShowModal(true) : navigateToLogin
-                  }
-                  variant="info"
-                >
-                  Rate routes
+              {
+                selectedRoute != -1 ?
+                <Col md={3} id="rateDiv">
+                  <Button
+                    onClick={
+                      isLoggedIn ? () => setShowModal(true) : navigateToLogin
+                    }
+                    variant="info"
+                  >
+                    Rate routes
                 </Button>
-              </Col>
+                </Col>
+                  :
+                  <Col></Col>
+            }
             </Row>
           </Container>
         </Accordion.Collapse>
