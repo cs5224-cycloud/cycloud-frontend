@@ -50,6 +50,8 @@ const CriteriaSliders = ({}) => {
         console.log("successful!");
         console.log(data);
         var parsedData = JSON.parse(data);
+        console.log(parsedData);
+        console.log(parsedData.payload);
         var maximumScore = 0;
         var bestRoute = -1;
         for (var i = 0; i < parsedData.length; i++) {
