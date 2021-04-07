@@ -50,7 +50,7 @@ const CriteriaSliders = ({}) => {
       .then((data) => {
         console.log("successful!");
         console.log(data);
-        var parsedData2 = response.json();
+        var parsedData2 = data.json();
         console.log(parsedData2);
         console.log(parsedData2.payload);
         var parsedData = JSON.parse(data);
