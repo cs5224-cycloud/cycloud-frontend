@@ -28,6 +28,9 @@ import path_start_end from "../configs/generated_path_start_end.json";
 import SelectSearch from "react-select-search";
 import fuzzySearch from "../services/fuzzySearch";
 
+const SLIDER_WIDTH = 10;
+const LABEL_WIDTH = 1;
+
 const Home = () => {
   const [layers, setLayers] = useState(["pcn_all"]);
   const [username, setUsername] = useState("");
@@ -120,7 +123,7 @@ const Home = () => {
         for (var i = 0; i < parsedData.length; i++) {
           if (parsedData[i].tables.score > maximumScore) {
             maximumScore = parsedData[i].tables.score;
-            bestRoute = parseInt(parsedData[i].tables.stringValue);
+            bestRoute = parseInt(parsedData[i].tables.value.stringValue);
           }
         }
         console.log(bestRoute);
@@ -159,53 +162,51 @@ const Home = () => {
                   <Tab eventKey="criteria" title="Search by Criteria">
                     <br />
 
-                          <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="difficultyRange">
-          <Form.Label>Route Difficulty</Form.Label>
-          <Row>
-            <Col md={LABEL_WIDTH}>Easy</Col>
-            <Col md={SLIDER_WIDTH}>
-              <Form.Control
-                type="range"
-                onChange={handleDifficultyChange}
-                value={difficulty}
-              />
-            </Col>
-            <Col md={LABEL_WIDTH}>Hard</Col>
-          </Row>
-          <br></br>
-          <Form.Label>Route Views</Form.Label>
-          <Row>
-            <Col md={LABEL_WIDTH}>Nature</Col>
-            <Col md={SLIDER_WIDTH}>
-              <Form.Control
-                type="range"
-                onChange={handleViewsChange}
-                value={views}
-              />
-            </Col>
-            <Col md={LABEL_WIDTH}>City</Col>
-          </Row>
-          <br></br>
-          <Form.Label>Route Traffic</Form.Label>
-          <Row>
-            <Col md={LABEL_WIDTH}>Light</Col>
-            <Col md={SLIDER_WIDTH}>
-              <Form.Control
-                type="range"
-                onChange={handleTrafficChange}
-                value={traffic}
-              />
-            </Col>
-            <Col md={LABEL_WIDTH}>Heavy</Col>
-          </Row>
-        </Form.Group>
-        <Button variant="secondary" type="submit" onClick={submitSearch}>
-          Find route
-        </Button>
-      </Form>
-
-
+                      <Form onSubmit={handleSubmit}>
+                      <Form.Group controlId="difficultyRange">
+                        <Form.Label>Route Difficulty</Form.Label>
+                        <Row>
+                          <Col md={LABEL_WIDTH}>Easy</Col>
+                          <Col md={SLIDER_WIDTH}>
+                            <Form.Control
+                              type="range"
+                              onChange={handleDifficultyChange}
+                              value={difficulty}
+                            />
+                          </Col>
+                          <Col md={LABEL_WIDTH}>Hard</Col>
+                        </Row>
+                        <br></br>
+                        <Form.Label>Route Views</Form.Label>
+                        <Row>
+                          <Col md={LABEL_WIDTH}>Nature</Col>
+                          <Col md={SLIDER_WIDTH}>
+                            <Form.Control
+                              type="range"
+                              onChange={handleViewsChange}
+                              value={views}
+                            />
+                          </Col>
+                          <Col md={LABEL_WIDTH}>City</Col>
+                        </Row>
+                        <br></br>
+                        <Form.Label>Route Traffic</Form.Label>
+                        <Row>
+                          <Col md={LABEL_WIDTH}>Light</Col>
+                          <Col md={SLIDER_WIDTH}>
+                            <Form.Control
+                              type="range"
+                              onChange={handleTrafficChange}
+                              value={traffic}
+                            />
+                          </Col>
+                          <Col md={LABEL_WIDTH}>Heavy</Col>
+                        </Row>
+                      </Form.Group>
+                      <Button variant="secondary" type="submit" onClick={submitSearch}>
+                        Find route
+                      </Button>
+                    </Form>
                     {/* <CriteriaSliders submitHandler={handleChoseRoute}/> */}
                   </Tab>
                   <Tab eventKey="search" title="Search by Routes">
