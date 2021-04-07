@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
 import GeneratedRoutes from "../configs/generated.json";
 import path_with_amenities from "../configs/generated_path_with_amenities.json";
+import L, { latLng } from "leaflet";
 
 const center = [1.3521, 103.8198];
 
@@ -25,6 +26,27 @@ const geojsonFeature = {
   },
 };
 
+const parser = new DOMParser();
+const parseAmenityType = (html) => {
+  const htmlDoc = parser.parseFromString(html, "text/html");
+  var tr = htmlDoc.querySelectorAll("table tr");
+  if (tr[1].querySelector("th").innerHTML == "CLASS") {
+    //console.log(tr[1].querySelector("td").innerHTML);
+    return tr[1].querySelector("td").innerHTML;
+  }
+};
+
+const trimDescription = (html) => {
+  const htmlDoc = parser.parseFromString(html, "text/html");
+  console.log(parser.parseFromString(html, "text/html"));
+  var rows = htmlDoc.querySelectorAll("table tr");
+  for (let i = 4; i < rows.length; i++) {
+    const el = rows[i];
+    el.remove();
+  }
+  return htmlDoc.documentElement.innerHTML;
+};
+
 const LeafletMap = ({ showPCN, selectedRoute }) => {
   const [pcnJson, setPcnLayer] = useState(geojsonFeature);
   const [amenitiesGeoJson, setAmenitiesGeoJson] = useState(geojsonFeature);
@@ -34,8 +56,98 @@ const LeafletMap = ({ showPCN, selectedRoute }) => {
 
   const onEachFeature = (feature, layer) => {
     if (feature.properties && feature.properties.Description) {
-      layer.bindPopup(feature.properties.Description);
+      let description = feature.properties.Description;
+      description = trimDescription(feature.properties.Description);
+      layer.bindPopup(description);
     }
+  };
+
+  const toiletIcon = L.icon({
+    iconUrl: "toiletIcon.png",
+    iconSize: [40, 40],
+
+    shadowUrl: "shadow.png",
+    shadowSize: [30, 30],
+    shadowAnchor: [10, 7],
+  });
+
+  const fitnessIcon = L.icon({
+    iconUrl: "fitness.png",
+    iconSize: [40, 40],
+  });
+
+  const shelterIcon = L.icon({
+    iconUrl: "shelter.png",
+    iconSize: [28, 28],
+  });
+
+  const meetingPtIcon = L.icon({
+    iconUrl: "meetingPoint.png",
+    iconSize: [25, 25],
+  });
+
+  const foodIcon = L.icon({
+    iconUrl: "food.png",
+    iconSize: [40, 40],
+    shadowUrl: "shadow.png",
+    shadowSize: [30, 30],
+    shadowAnchor: [8, 5],
+  });
+
+  const waterIcon = L.icon({
+    iconUrl: "water.png",
+    iconSize: [37, 38],
+    shadowUrl: "shadow.png",
+    shadowSize: [30, 30],
+    shadowAnchor: [8, 5],
+  });
+
+  const carparkIcon = L.icon({
+    iconUrl: "carpark.png",
+    iconSize: [25, 25],
+  });
+
+  const bikeIcon = L.icon({
+    iconUrl: "bicycle.png",
+    iconSize: [35, 35],
+    shadowUrl: "shadow.png",
+    shadowSize: [35, 35],
+    shadowAnchor: [4, 6],
+  });
+
+  const pointToLayer = (feature, latLng) => {
+    //console.log(feature, latLng);
+    const description = feature.properties.Description;
+    const amenityType = parseAmenityType(description);
+    let amenityIcon;
+    switch (amenityType) {
+      case "TOILET":
+        amenityIcon = toiletIcon;
+        break;
+      case "SHELTER":
+        amenityIcon = shelterIcon;
+        break;
+      case "FITNESS AREA":
+        amenityIcon = fitnessIcon;
+        break;
+      case "F&amp;B":
+        amenityIcon = foodIcon;
+        break;
+      case "CARPARK":
+        amenityIcon = carparkIcon;
+        break;
+      case "BICYCLE RENTAL SHOP":
+        amenityIcon = bikeIcon;
+        break;
+      case "WATER POINT":
+        amenityIcon = waterIcon;
+        break;
+    }
+
+    if (amenityIcon) {
+      return L.marker(latLng, { icon: amenityIcon });
+    }
+    return L.marker(latLng);
   };
 
   useEffect(() => {
@@ -44,7 +156,7 @@ const LeafletMap = ({ showPCN, selectedRoute }) => {
       .then((data) => {
         //console.log(data);
         setPcnLayer(data);
-        setJsonLoaded(1);
+        setJsonLoaded(1337);
       })
       .catch((err) => console.error(err));
 
@@ -97,11 +209,14 @@ const LeafletMap = ({ showPCN, selectedRoute }) => {
           kmlName = String(kmlName).slice(4);
           if (selectedRoute < 0) {
             return false;
-          } else if (selectedPath["amenities"].includes(parseInt(kmlName) - 1)) {
+          } else if (
+            selectedPath["amenities"].includes(parseInt(kmlName) - 1)
+          ) {
             return true;
           }
         }}
         onEachFeature={onEachFeature}
+        pointToLayer={pointToLayer}
       />
       <Marker position={[51.505, -0.09]}>
         <Popup>
