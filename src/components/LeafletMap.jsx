@@ -31,14 +31,12 @@ const parseAmenityType = (html) => {
   const htmlDoc = parser.parseFromString(html, "text/html");
   var tr = htmlDoc.querySelectorAll("table tr");
   if (tr[1].querySelector("th").innerHTML == "CLASS") {
-    //console.log(tr[1].querySelector("td").innerHTML);
     return tr[1].querySelector("td").innerHTML;
   }
 };
 
 const trimDescription = (html) => {
   const htmlDoc = parser.parseFromString(html, "text/html");
-  console.log(parser.parseFromString(html, "text/html"));
   var rows = htmlDoc.querySelectorAll("table tr");
   for (let i = 4; i < rows.length; i++) {
     const el = rows[i];
