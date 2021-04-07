@@ -36,6 +36,7 @@ const CriteriaSliders = ({}) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          'Accept': 'application/json'
         },
         body: JSON.stringify({
           inputs: [
@@ -49,6 +50,9 @@ const CriteriaSliders = ({}) => {
       .then((data) => {
         console.log("successful!");
         console.log(data);
+        var parsedData2 = response.json();
+        console.log(parsedData2);
+        console.log(parsedData2.payload);
         var parsedData = JSON.parse(data);
         console.log(parsedData);
         console.log(parsedData.payload);
