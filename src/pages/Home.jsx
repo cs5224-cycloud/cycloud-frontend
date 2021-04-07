@@ -73,7 +73,7 @@ const Home = () => {
   return (
     <>
       {isLoggedIn ? <h1>Hi {username}</h1> : <h1></h1>}
-      <ToggleButtonGroup
+      {/* <ToggleButtonGroup
         type="checkbox"
         value={layers}
         onChange={handleLayersChange}
@@ -82,7 +82,7 @@ const Home = () => {
         <ToggleButton variant="success" value={"pcn_all"}>
           Display PCNs
         </ToggleButton>
-      </ToggleButtonGroup>
+      </ToggleButtonGroup> */}
       <br />
       <Col md={10}>
         <Weather />
