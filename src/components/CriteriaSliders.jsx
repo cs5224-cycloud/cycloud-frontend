@@ -47,12 +47,9 @@ const CriteriaSliders = ({}) => {
         }),
       }
     )
-      .then((data) => {
-        console.log("successful!");
-        console.log(data);
-        var parsedData2 = await (data.json());
-        console.log(parsedData2);
-        console.log(parsedData2.payload);
+      .then((data) => data.json())
+      .then(json => {
+        var parsedData = json.payload;
         var maximumScore = 0;
         var bestRoute = -1;
         for (var i = 0; i < parsedData.length; i++) {
@@ -62,11 +59,7 @@ const CriteriaSliders = ({}) => {
           }
         }
         this.props.submitHandler(bestRoute);
-      })
-      .catch((error) => {
-        console.log(error, "catch the hoop");
       });
-
   }
 
   return (
