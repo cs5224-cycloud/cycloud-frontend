@@ -36,6 +36,17 @@ const parseAmenityType = (html) => {
   }
 };
 
+const trimDescription = (html) => {
+  const htmlDoc = parser.parseFromString(html, "text/html");
+  console.log(parser.parseFromString(html, "text/html"));
+  var rows = htmlDoc.querySelectorAll("table tr");
+  for (let i = 4; i < rows.length; i++) {
+    const el = rows[i];
+    el.remove();
+  }
+  return htmlDoc.documentElement.innerHTML;
+};
+
 const LeafletMap = ({ showPCN, selectedRoute }) => {
   const [pcnJson, setPcnLayer] = useState(geojsonFeature);
   const [amenitiesGeoJson, setAmenitiesGeoJson] = useState(geojsonFeature);
@@ -45,7 +56,9 @@ const LeafletMap = ({ showPCN, selectedRoute }) => {
 
   const onEachFeature = (feature, layer) => {
     if (feature.properties && feature.properties.Description) {
-      layer.bindPopup(feature.properties.Description);
+      let description = feature.properties.Description;
+      description = trimDescription(feature.properties.Description);
+      layer.bindPopup(description);
     }
   };
 
