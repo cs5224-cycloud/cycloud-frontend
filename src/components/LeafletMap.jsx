@@ -107,7 +107,28 @@ const LeafletMap = ({ showPCN, selectedRoute }) => {
 
   const bikeIcon = L.icon({
     iconUrl: "bicycle.png",
-    iconSize: [35, 35],
+    iconSize: [40, 40],
+    shadowUrl: "shadow.png",
+    shadowSize: [35, 35],
+    shadowAnchor: [4, 6],
+  });
+
+  const tentIcon = L.icon({
+    iconUrl: "tent.png",
+    iconSize: [43, 43],
+    shadowUrl: "shadow.png",
+    shadowSize: [35, 35],
+    shadowAnchor: [4, 6],
+  });
+
+  const bbqIcon = L.icon({
+    iconUrl: "bbq.png",
+    iconSize: [25, 25],
+  });
+
+  const playgroundIcon = L.icon({
+    iconUrl: "playground.png",
+    iconSize: [40, 40],
     shadowUrl: "shadow.png",
     shadowSize: [35, 35],
     shadowAnchor: [4, 6],
@@ -139,6 +160,15 @@ const LeafletMap = ({ showPCN, selectedRoute }) => {
         break;
       case "WATER POINT":
         amenityIcon = waterIcon;
+        break;
+      case "BBQ PIT":
+        amenityIcon = bbqIcon;
+        break;
+      case "CAMPSITE":
+        amenityIcon = tentIcon;
+        break;
+      case "PLAYGROUND":
+        amenityIcon = playgroundIcon;
         break;
     }
 

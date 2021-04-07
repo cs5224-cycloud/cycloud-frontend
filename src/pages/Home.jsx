@@ -1,6 +1,3 @@
-// import { Auth } from 'aws-amplify';
-// import { AmplifySignOut } from "@aws-amplify/ui-react";
-
 import React, { useEffect, useState, useRef } from "react";
 import {
   Container,
@@ -19,7 +16,12 @@ import {
   Tab,
 } from "react-bootstrap";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
-import { LeafletMap, ReviewModal, Weather, CriteriaSliders } from "../components";
+import {
+  LeafletMap,
+  ReviewModal,
+  Weather,
+  CriteriaSliders,
+} from "../components";
 import { findRenderedDOMComponentWithClass } from "react-dom/cjs/react-dom-test-utils.development";
 import { Auth } from "aws-amplify";
 import { Link, Redirect, useHistory } from "react-router-dom";
@@ -88,13 +90,15 @@ const Home = () => {
     const form = event.currentTarget;
     console.log(form);
     console.log(difficulty, views, traffic);
-    console.log(JSON.stringify({
-      inputs: [
-        { numberValue: difficulty },
-        { numberValue: views },
-        { numberValue: traffic }
-      ]
-    }));
+    console.log(
+      JSON.stringify({
+        inputs: [
+          { numberValue: difficulty },
+          { numberValue: views },
+          { numberValue: traffic },
+        ],
+      })
+    );
   };
 
   const submitSearch = () => {
@@ -104,19 +108,19 @@ const Home = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          'Accept': 'application/json'
+          Accept: "application/json",
         },
         body: JSON.stringify({
           inputs: [
             { numberValue: difficulty },
             { numberValue: views },
-            { numberValue: traffic }
-          ]
+            { numberValue: traffic },
+          ],
         }),
       }
     )
       .then((data) => data.json())
-      .then(json => {
+      .then((json) => {
         var parsedData = json.payload;
         var maximumScore = 0;
         var bestRoute = -1;
@@ -129,11 +133,12 @@ const Home = () => {
         console.log(bestRoute);
         handleChoseRoute(bestRoute);
       });
-  }
+  };
 
   return (
     <>
-      {isLoggedIn ? <h1>Hi {username}</h1> : <h1></h1>}
+      <br />
+      {isLoggedIn && <h2>Welcome {username}!</h2>}
       {/* <ToggleButtonGroup
         type="checkbox"
         value={layers}
@@ -145,40 +150,51 @@ const Home = () => {
         </ToggleButton>
       </ToggleButtonGroup> */}
       <br />
-      <Col md={10}>
-        <Weather />
-      </Col>
+      <Accordion defaultActiveKey="0">
+        <Accordion.Toggle as={Card.Header} eventKey="0">
+          <b id="accord-toggle1">4-Day Weather Forecast</b>
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="0">
+          <Col md={10}>
+            <Weather />
+          </Col>
+        </Accordion.Collapse>
+      </Accordion>
       <br />
       <Row className="justify-content-md-center">
-        
-        {
-          selectedRoute != -1 ?
-            
-            <h3>Selected route: {selectedRoute}</h3>
-            :
-            <h3><i>No route selected</i></h3>
-        }
+        {selectedRoute != -1 ? (
+          <h4>
+            Selected route:{" "}
+            {selectedRoute && startEndsArray[selectedRoute].name} [
+            {selectedRoute}]
+          </h4>
+        ) : (
+          <h4>
+            <i>No route selected</i>
+          </h4>
+        )}
       </Row>
 
       <Accordion defaultActiveKey="0">
         <Accordion.Toggle as={Card.Header} eventKey="0">
-          <b id="accord-toggle">Options</b>
+          <b id="accord-toggle2">Options</b>
         </Accordion.Toggle>
 
         <Accordion.Collapse eventKey="0">
           <Container fluid>
             <br />
-            <Row>
-            </Row>
+            <Row></Row>
             <Row>
               <Col md={9}>
-                <Tabs defaultActiveKey="search" id="uncontrolled-tab">
+                <Tabs defaultActiveKey="criteria" id="uncontrolled-tab">
                   <Tab eventKey="criteria" title="Search by Criteria">
                     <br />
 
-                      <Form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmit}>
                       <Form.Group controlId="difficultyRange">
-                        <Form.Label>Route Difficulty</Form.Label>
+                        <Form.Label>
+                          <b>Route Difficulty</b>
+                        </Form.Label>
                         <Row>
                           <Col md={LABEL_WIDTH}>Easy</Col>
                           <Col md={SLIDER_WIDTH}>
@@ -191,7 +207,9 @@ const Home = () => {
                           <Col md={LABEL_WIDTH}>Hard</Col>
                         </Row>
                         <br></br>
-                        <Form.Label>Route Views</Form.Label>
+                        <Form.Label>
+                          <b>Route Views</b>
+                        </Form.Label>
                         <Row>
                           <Col md={LABEL_WIDTH}>Nature</Col>
                           <Col md={SLIDER_WIDTH}>
@@ -204,7 +222,9 @@ const Home = () => {
                           <Col md={LABEL_WIDTH}>City</Col>
                         </Row>
                         <br></br>
-                        <Form.Label>Route Traffic</Form.Label>
+                        <Form.Label>
+                          <b>Route Traffic</b>
+                        </Form.Label>
                         <Row>
                           <Col md={LABEL_WIDTH}>Light</Col>
                           <Col md={SLIDER_WIDTH}>
@@ -217,13 +237,18 @@ const Home = () => {
                           <Col md={LABEL_WIDTH}>Heavy</Col>
                         </Row>
                       </Form.Group>
-                      <Button variant="secondary" type="submit" onClick={submitSearch}>
+                      <Button
+                        variant="success"
+                        type="submit"
+                        onClick={submitSearch}
+                      >
                         Find route
                       </Button>
                     </Form>
                     {/* <CriteriaSliders submitHandler={handleChoseRoute}/> */}
                   </Tab>
                   <Tab eventKey="search" title="Search by Routes">
+                    <br />
                     <SelectSearch
                       search
                       options={startEndsArray}
@@ -235,8 +260,7 @@ const Home = () => {
                   </Tab>
                 </Tabs>
               </Col>
-              {
-                selectedRoute != -1 ?
+              {selectedRoute != -1 ? (
                 <Col md={3} id="rateDiv">
                   <Button
                     onClick={
@@ -244,12 +268,12 @@ const Home = () => {
                     }
                     variant="info"
                   >
-                    Rate routes
-                </Button>
+                    Rate route
+                  </Button>
                 </Col>
-                  :
-                  <Col></Col>
-            }
+              ) : (
+                <Col></Col>
+              )}
             </Row>
           </Container>
         </Accordion.Collapse>
@@ -259,7 +283,7 @@ const Home = () => {
         showPCN={layers.includes("pcn_all")}
         selectedRoute={selectedRoute}
       />
-      {isLoggedIn && (selectedRoute != -1) ? (
+      {isLoggedIn && selectedRoute != -1 ? (
         <Button onClick={handleSignOut}>Sign out</Button>
       ) : (
         <h1></h1>

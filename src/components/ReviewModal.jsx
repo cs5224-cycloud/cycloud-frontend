@@ -20,10 +20,10 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
 
   const handleTrafficChange = ({ target: { value } }) => setTraffic(value);
 
-  const handleReviewChange = ( newRating, name ) => {
+  const handleReviewChange = (newRating, name) => {
     setReview(newRating);
-  }
-  
+  };
+
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     console.log("This is the difficulty value");
@@ -98,12 +98,14 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
   return (
     <Modal show={showModal} onHide={handleClose} size="lg" centered>
       <Modal.Header closeButton>
-        <Modal.Title>Review routes</Modal.Title>
+        <Modal.Title>Review route</Modal.Title>
       </Modal.Header>
       <Form onSubmit={handleSubmit}>
         <Modal.Body>
           <Form.Group controlId="difficultyRange">
-            <Form.Label>Route Difficulty</Form.Label>
+            <Form.Label>
+              <b>Route Difficulty</b>
+            </Form.Label>
             <Row>
               <Col md={1}>Easy</Col>
               <Col md={10}>
@@ -116,7 +118,9 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
               <Col md={1}>Hard</Col>
             </Row>
             <br></br>
-            <Form.Label>Route Views</Form.Label>
+            <Form.Label>
+              <b>Route Views</b>
+            </Form.Label>
             <Row>
               <Col md={1}>Nature</Col>
               <Col md={10}>
@@ -129,7 +133,10 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
               <Col md={1}>City</Col>
             </Row>
             <br></br>
-            <Form.Label>Route Traffic</Form.Label>
+            <Form.Label>
+              {" "}
+              <b>Route Traffic</b>
+            </Form.Label>
             <Row>
               <Col md={1}>Easy</Col>
               <Col md={10}>
@@ -143,20 +150,22 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
             </Row>
             <Row></Row>
             <br></br>
-            <Form.Label>Overall Experience</Form.Label>
+            <Form.Label>
+              <b>Overall Experience</b>
+            </Form.Label>
             <Row>
-              <Col md={1}>Bad</Col>
+              <Col md={1}></Col>
               <Col md={10}>
                 <StarRatings
                   rating={review}
                   starHoverColor="yellow"
-                  starRatedColor="yellow"
+                  starRatedColor="gold"
                   changeRating={handleReviewChange}
                   numberOfStars={5}
-                  name='rating'
+                  name="rating"
                 />
               </Col>
-              <Col md={1}>Good</Col>
+              <Col md={1}></Col>
             </Row>
           </Form.Group>
         </Modal.Body>
