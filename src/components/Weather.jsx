@@ -56,7 +56,7 @@ const Weather = () => {
 
   return (
     <div>
-      <h5>4-Day Weather Forecast</h5>
+      <br />
       <CardGroup>
         {weatherForecasts.map((dayObj, index) => (
           <Card style={{ width: "12rem" }} key={index}>
