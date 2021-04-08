@@ -100,7 +100,8 @@ const Home = () => {
     );
   };
 
-  const submitSearch = () => {
+  const submitSearch = (event) => {
+    event.preventDefault();
     fetch(
       "https://us-central1-sage-philosophy-309216.cloudfunctions.net/demo_reco_endpoint",
       {
