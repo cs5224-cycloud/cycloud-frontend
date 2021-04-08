@@ -65,12 +65,6 @@ const Home = () => {
       setIsLoggedIn(false);
     });
 
-  const handleSignOut = (e) => {
-    e.preventDefault();
-    Auth.signOut();
-    <Redirect to={{ pathname: "/" }} />;
-  };
-
   const history = useHistory();
   const navigateToLogin = () => history.push("/login"); //eg.history.push('/login');
 
@@ -138,17 +132,15 @@ const Home = () => {
   return (
     <>
       <br />
-      {isLoggedIn && <h2>Welcome {username}!</h2>}
-      {/* <ToggleButtonGroup
-        type="checkbox"
-        value={layers}
-        onChange={handleLayersChange}
-        vertical={true}
-      >
-        <ToggleButton variant="success" value={"pcn_all"}>
-          Display PCNs
-        </ToggleButton>
-      </ToggleButtonGroup> */}
+      <Row style={{justifyContent : 'space-between'}}>
+        {isLoggedIn && <h2>Welcome {username}!</h2>}
+      
+      {isLoggedIn ? (
+        <AmplifySignOut></AmplifySignOut>
+      ) : (
+        <h1></h1>
+        )}
+      </Row>
       <br />
       <Accordion defaultActiveKey="0">
         <Accordion.Toggle as={Card.Header} eventKey="0">
@@ -289,11 +281,6 @@ const Home = () => {
         showPCN={layers.includes("pcn_all")}
         selectedRoute={selectedRoute}
       />
-      {isLoggedIn && selectedRoute != -1 ? (
-        <Button onClick={handleSignOut}>Sign out</Button>
-      ) : (
-        <h1></h1>
-      )}
       <ReviewModal
         showModal={showModal}
         handleClose={() => setShowModal(false)}

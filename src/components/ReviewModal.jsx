@@ -24,14 +24,6 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
     setReview(newRating);
   };
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    console.log("This is the difficulty value");
-    console.log(difficulty);
-    console.log(views);
-    console.log(review);
-  };
-
   const successfulSubmissionModal = (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -49,7 +41,8 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
     </Modal>
   );
 
-  const submitReview = () => {
+  const submitReview = (event) => {
+    event.preventDefault();
     fetch(
       "https://kems29t9qc.execute-api.ap-southeast-1.amazonaws.com/Prod/insertRating",
       {
@@ -100,7 +93,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
       <Modal.Header closeButton>
         <Modal.Title>Review route</Modal.Title>
       </Modal.Header>
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <Modal.Body>
           <Form.Group controlId="difficultyRange">
             <Form.Label>
