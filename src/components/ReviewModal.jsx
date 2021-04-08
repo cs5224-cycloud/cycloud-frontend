@@ -3,10 +3,10 @@ import { Row, Col, Modal, Button, Range, Form } from "react-bootstrap";
 import StarRatings from "react-star-ratings";
 
 const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
-  const [difficulty, setDifficulty] = useState(50);
-  const [views, setViews] = useState(50);
-  const [traffic, setTraffic] = useState(50);
-  const [review, setReview] = useState(50);
+  const [difficulty, setDifficulty] = useState(3);
+  const [views, setViews] = useState(3);
+  const [traffic, setTraffic] = useState(3);
+  const [review, setReview] = useState(3);
   const [show, setShowSuccessfulSubmissionModal] = useState(false);
   const handleCloseSuccessfulSubmissionModal = () =>
     setShowSuccessfulSubmissionModal(false);
@@ -113,6 +113,8 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
                   type="range"
                   onChange={handleDifficultyChange}
                   value={difficulty}
+                  min={1}
+                  max={5}
                 />
               </Col>
               <Col md={1}>Hard</Col>
@@ -128,6 +130,8 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
                   type="range"
                   onChange={handleViewsChange}
                   value={views}
+                  min={1}
+                  max={5}
                 />
               </Col>
               <Col md={1}>City</Col>
@@ -144,6 +148,8 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
                   type="range"
                   onChange={handleTrafficChange}
                   value={traffic}
+                  min={1}
+                  max={5}
                 />
               </Col>
               <Col md={1}>Hard</Col>

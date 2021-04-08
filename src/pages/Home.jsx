@@ -20,7 +20,6 @@ import {
   LeafletMap,
   ReviewModal,
   Weather,
-  CriteriaSliders,
 } from "../components";
 import { findRenderedDOMComponentWithClass } from "react-dom/cjs/react-dom-test-utils.development";
 import { Auth } from "aws-amplify";
@@ -75,9 +74,9 @@ const Home = () => {
   const history = useHistory();
   const navigateToLogin = () => history.push("/login"); //eg.history.push('/login');
 
-  const [difficulty, setDifficulty] = useState(50);
-  const [views, setViews] = useState(50);
-  const [traffic, setTraffic] = useState(50);
+  const [difficulty, setDifficulty] = useState(3);
+  const [views, setViews] = useState(3);
+  const [traffic, setTraffic] = useState(3);
 
   const handleDifficultyChange = ({ target: { value } }) =>
     setDifficulty(value);
@@ -202,6 +201,8 @@ const Home = () => {
                               type="range"
                               onChange={handleDifficultyChange}
                               value={difficulty}
+                              min={1}
+                              max={5}
                             />
                           </Col>
                           <Col md={LABEL_WIDTH}>Hard</Col>
@@ -217,6 +218,8 @@ const Home = () => {
                               type="range"
                               onChange={handleViewsChange}
                               value={views}
+                              min={1}
+                              max={5}
                             />
                           </Col>
                           <Col md={LABEL_WIDTH}>City</Col>
@@ -232,6 +235,8 @@ const Home = () => {
                               type="range"
                               onChange={handleTrafficChange}
                               value={traffic}
+                              min={1}
+                              max={5}
                             />
                           </Col>
                           <Col md={LABEL_WIDTH}>Heavy</Col>
