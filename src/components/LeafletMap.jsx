@@ -7,10 +7,10 @@ import L, { latLng } from "leaflet";
 const center = [1.3521, 103.8198];
 
 const PCN_GEOJSON_URL =
-  "https://a0167086w-nus-03032021.s3.amazonaws.com/park-connector-loop-geojson.geojson";
+  "https://pcn-geojson-data.s3-ap-southeast-1.amazonaws.com/park-connector-loop-geojson.geojson";
 
 const AMENITIES_GEOJSON_URL =
-  "https://a0167086w-nus-03032021.s3.amazonaws.com/park-facilities-geojson.geojson";
+  "https://pcn-geojson-data.s3-ap-southeast-1.amazonaws.com/park-facilities-geojson.geojson";
 
 // initial geojson placeholder
 const geojsonFeature = {

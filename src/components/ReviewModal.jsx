@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Modal, Button, Range, Form } from "react-bootstrap";
 import StarRatings from "react-star-ratings";
+import path_start_end from "../configs/generated_path_start_end.json";
 
 const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
   const [difficulty, setDifficulty] = useState(3);
@@ -23,6 +24,13 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
   const handleReviewChange = (newRating, name) => {
     setReview(newRating);
   };
+
+  const startEndsArray = path_start_end["paths"].map((path, index) => {
+    return {
+      name: path.start.trim() + " - " + path.end.trim(),
+      value: index,
+    };
+  });
 
   const submitReview = (event) => {
     event.preventDefault();
@@ -81,6 +89,11 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
       </Modal.Header>
       <Form>
         <Modal.Body>
+          <div>
+            <b>Route:</b>{" "}
+            {selectedRoute != -1 && startEndsArray[selectedRoute].name}
+          </div>
+          <br />
           <Form.Group controlId="difficultyRange">
             <Form.Label>
               <b>Route Difficulty</b>
@@ -152,6 +165,11 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
               </Col>
               <Col md={1}></Col>
             </Row>
+            <br />
+            <div>
+              By reviewing the route, you'll help us to provide better route
+              recommendations to other users. Thank you!
+            </div>
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
