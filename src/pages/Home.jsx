@@ -61,13 +61,6 @@ const Home = () => {
       setIsLoggedIn(false);
     });
 
-  /*
-  const handleSignOut = (e) => {
-    e.preventDefault();
-    Auth.signOut();
-    history.push("/login");
-  };*/
-
   const history = useHistory();
   const navigateToLogin = () => history.push("/login"); //eg.history.push('/login');
 
@@ -132,13 +125,29 @@ const Home = () => {
       });
   };
 
+  const handleAuthStateChange = (nextAuthState, data) => {
+    if (nextAuthState == "signedout") {
+      history.push("/");
+    }
+  };
+
   return (
     <>
       <br />
       <Row style={{ justifyContent: "space-between" }}>
-        {isLoggedIn && <h2>Welcome {username}!</h2>}
-
-        {isLoggedIn ? <AmplifySignOut></AmplifySignOut> : <h1></h1>}
+        <Col md={10}>{isLoggedIn && <h2>Welcome {username}!</h2>}</Col>
+        <Col>
+          {" "}
+          {isLoggedIn ? (
+            <AmplifySignOut
+              handleAuthStateChange={handleAuthStateChange}
+            ></AmplifySignOut>
+          ) : (
+            <Link to="/login">
+              <button id="loginBtn">SIGN IN</button>
+            </Link>
+          )}
+        </Col>
       </Row>
       <br />
       <Accordion defaultActiveKey="0">
