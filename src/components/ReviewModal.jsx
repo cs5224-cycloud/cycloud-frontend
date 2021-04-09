@@ -7,16 +7,11 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
   const [views, setViews] = useState(3);
   const [traffic, setTraffic] = useState(3);
   const [review, setReview] = useState(3);
-  const [showSuccess, setShowSuccessfulSubmissionModal] = useState(false);
-  const [showFailed, setShowFailedSubmissionModal] = useState(false);
-  const handleCloseSuccessfulSubmissionModal = () =>
-    setShowSuccessfulSubmissionModal(false);
-  const handleCloseFailedSubmissionModal = () =>
-    setShowFailedSubmissionModal(false);
-  const handleShowSuccessfulSubmissionModal = () =>
-    setShowSuccessfulSubmissionModal(true);
-  const handleShowFailedSubmissionModal = () =>
-    setShowFailedSubmissionModal(true);
+
+  const handleSuccessfulRating = () => alert("Thank you, your rating is successfully submitted!");
+  const handleFailedRating = () => alert("You rated this route already!");
+  const handleSuccessfulTagging = () => alert("Thank you, your tagging is successfully submitted!");
+  const handleFailedTagging = () => alert("You tagged this route already!");
 
   const handleDifficultyChange = ({ target: { value } }) =>
     setDifficulty(value);
@@ -28,40 +23,6 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
   const handleReviewChange = (newRating, name) => {
     setReview(newRating);
   };
-
-  const successfulSubmissionModal = (
-    <Modal show={showSuccess} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Review submission</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>Woohoo, thank you for the review!</Modal.Body>
-      <Modal.Footer>
-        <Button
-          variant="secondary"
-          onClick={handleCloseFailedSubmissionModal}
-        >
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  );
-
-    const failedSubmissionModal = (
-    <Modal show={showFailed} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>You have reviewed this route before!</Modal.Body>
-      <Modal.Footer>
-        <Button
-          variant="secondary"
-          onClick={handleCloseSuccessfulSubmissionModal}
-        >
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  );
 
   const submitReview = (event) => {
     event.preventDefault();
@@ -81,10 +42,10 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
       }
     )
       .then((data) => {
-        handleShowSuccessfulSubmissionModal();
+        handleSuccessfulRating();
       })
       .catch((error) => {
-        handleShowFailedSubmissionModal();
+        handleFailedRating();
       });
 
     fetch(
@@ -105,17 +66,15 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
       }
     )
       .then((data) => {
-        handleShowSuccessfulSubmissionModal();
+        handleSuccessfulTagging();
       })
       .catch((error) => {
-        handleShowFailedSubmissionModal();
+        handleFailedTagging();
       });
   };
 
   return (
     <div>
-      {/* {showSuccess ? successfulSubmissionModal : <div></div>}
-      {showFailed ? failedSubmissionModal : <div></div>} */}
       <Modal show={showModal} onHide={handleClose} size="lg" centered>
       <Modal.Header closeButton>
         <Modal.Title>Review route</Modal.Title>
