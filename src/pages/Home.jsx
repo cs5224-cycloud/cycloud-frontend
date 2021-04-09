@@ -16,11 +16,7 @@ import {
   Tab,
 } from "react-bootstrap";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
-import {
-  LeafletMap,
-  ReviewModal,
-  Weather,
-} from "../components";
+import { LeafletMap, ReviewModal, Weather } from "../components";
 import { findRenderedDOMComponentWithClass } from "react-dom/cjs/react-dom-test-utils.development";
 import { Auth } from "aws-amplify";
 import { Link, Redirect, useHistory } from "react-router-dom";
@@ -64,6 +60,13 @@ const Home = () => {
     .catch((err) => {
       setIsLoggedIn(false);
     });
+
+  /*
+  const handleSignOut = (e) => {
+    e.preventDefault();
+    Auth.signOut();
+    history.push("/login");
+  };*/
 
   const history = useHistory();
   const navigateToLogin = () => history.push("/login"); //eg.history.push('/login');
@@ -132,14 +135,10 @@ const Home = () => {
   return (
     <>
       <br />
-      <Row style={{justifyContent : 'space-between'}}>
+      <Row style={{ justifyContent: "space-between" }}>
         {isLoggedIn && <h2>Welcome {username}!</h2>}
-      
-      {isLoggedIn ? (
-        <AmplifySignOut></AmplifySignOut>
-      ) : (
-        <h1></h1>
-        )}
+
+        {isLoggedIn ? <AmplifySignOut></AmplifySignOut> : <h1></h1>}
       </Row>
       <br />
       <Accordion defaultActiveKey="0">
@@ -157,7 +156,7 @@ const Home = () => {
         {selectedRoute != -1 ? (
           <h4>
             Selected route:{" "}
-            {selectedRoute && startEndsArray[selectedRoute].name} [
+            {selectedRoute >= 0 && startEndsArray[selectedRoute].name} [
             {selectedRoute}]
           </h4>
         ) : (

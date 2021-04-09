@@ -28,6 +28,7 @@ export default function Layout() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/">Home</Nav.Link>
+            {/* <Nav.Link class="" href="/login">Login</Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
