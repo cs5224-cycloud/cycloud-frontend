@@ -140,7 +140,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
               <b>Route Traffic</b>
             </Form.Label>
             <Row>
-              <Col md={1}>Easy</Col>
+              <Col md={1}>Light</Col>
               <Col md={10}>
                 <Form.Control
                   type="range"
@@ -150,7 +150,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
                   max={5}
                 />
               </Col>
-              <Col md={1}>Hard</Col>
+              <Col md={1}>Heavy</Col>
             </Row>
             <Row></Row>
             <br></br>
