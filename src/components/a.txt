@@ -1,0 +1,15 @@
+    <Toast show={showSuccess} onHide={handleClose}>
+      <Toast.Header closeButton>
+        <Toast.Title>Review submission</Toast.Title>
+      </Toast.Header>
+      <Toast.Body>Woohoo, thank you for the review!</Toast.Body>
+      <Toast.Footer>
+        <Button
+          variant="secondary"
+          onClick={handleCloseFailedSubmissionToast}
+        >
+          Close
+        </Button>
+      </Toast.Footer>
+    </Toast>
+  );

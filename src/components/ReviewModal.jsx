@@ -7,11 +7,16 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
   const [views, setViews] = useState(3);
   const [traffic, setTraffic] = useState(3);
   const [review, setReview] = useState(3);
-  const [show, setShowSuccessfulSubmissionModal] = useState(false);
+  const [showSuccess, setShowSuccessfulSubmissionModal] = useState(false);
+  const [showFailed, setShowFailedSubmissionModal] = useState(false);
   const handleCloseSuccessfulSubmissionModal = () =>
     setShowSuccessfulSubmissionModal(false);
+  const handleCloseFailedSubmissionModal = () =>
+    setShowFailedSubmissionModal(false);
   const handleShowSuccessfulSubmissionModal = () =>
     setShowSuccessfulSubmissionModal(true);
+  const handleShowFailedSubmissionModal = () =>
+    setShowFailedSubmissionModal(true);
 
   const handleDifficultyChange = ({ target: { value } }) =>
     setDifficulty(value);
@@ -25,11 +30,28 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
   };
 
   const successfulSubmissionModal = (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={showSuccess} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Review submission</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>Woohoo, thank you for the review!</Modal.Body>
+      <Modal.Footer>
+        <Button
+          variant="secondary"
+          onClick={handleCloseFailedSubmissionModal}
+        >
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+
+    const failedSubmissionModal = (
+    <Modal show={showFailed} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Modal heading</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Woohoo, your review is submitted!</Modal.Body>
+      <Modal.Body>You have reviewed this route before!</Modal.Body>
       <Modal.Footer>
         <Button
           variant="secondary"
@@ -49,6 +71,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify({
           route_id: selectedRoute,
@@ -61,7 +84,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
         handleShowSuccessfulSubmissionModal();
       })
       .catch((error) => {
-        console.log(error, "catch the hoop");
+        handleShowFailedSubmissionModal();
       });
 
     fetch(
@@ -70,6 +93,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify({
           route_id: selectedRoute,
@@ -84,12 +108,15 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
         handleShowSuccessfulSubmissionModal();
       })
       .catch((error) => {
-        console.log(error, "catch the hoop");
+        handleShowFailedSubmissionModal();
       });
   };
 
   return (
-    <Modal show={showModal} onHide={handleClose} size="lg" centered>
+    <div>
+      {/* {showSuccess ? successfulSubmissionModal : <div></div>}
+      {showFailed ? failedSubmissionModal : <div></div>} */}
+      <Modal show={showModal} onHide={handleClose} size="lg" centered>
       <Modal.Header closeButton>
         <Modal.Title>Review route</Modal.Title>
       </Modal.Header>
@@ -177,7 +204,8 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
           </Button>
         </Modal.Footer>
       </Form>
-    </Modal>
+      </Modal>
+      </div>
   );
 };
 
