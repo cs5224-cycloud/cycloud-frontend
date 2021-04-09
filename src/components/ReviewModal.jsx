@@ -25,15 +25,6 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
     setReview(newRating);
   };
 
-  /*
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    console.log("This is the difficulty value");
-    console.log(difficulty);
-    console.log(views);
-    console.log(review);
-  };*/
-
   const startEndsArray = path_start_end["paths"].map((path, index) => {
     return {
       name: path.start.trim() + " - " + path.end.trim(),
