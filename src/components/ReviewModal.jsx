@@ -8,6 +8,11 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
   const [views, setViews] = useState(3);
   const [traffic, setTraffic] = useState(3);
   const [review, setReview] = useState(3);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  useEffect(() => {
+    setFormSubmitted(false);
+  }, [showModal]);
 
   const handleSuccessfulRating = () => alert("Thank you, your rating is successfully submitted!");
   const handleFailedRating = () => alert("You rated this route already!");
@@ -33,6 +38,7 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
   });
 
   const submitReview = (event) => {
+    setFormSubmitted(true);
     event.preventDefault();
     fetch(
       "https://kems29t9qc.execute-api.ap-southeast-1.amazonaws.com/Prod/insertRating",
@@ -176,9 +182,14 @@ const ReviewModal = ({ showModal, handleClose, selectedRoute, username }) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={submitReview} type="submit">
-            Submit
-          </Button>
+          <Button
+              variant="primary"
+              onClick={submitReview}
+              type="submit"
+              disabled={formSubmitted}
+            >
+              Submit
+            </Button>
         </Modal.Footer>
       </Form>
       </Modal>
